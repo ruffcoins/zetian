@@ -13,6 +13,7 @@ class _RegisterState extends State<Register> {
         resizeToAvoidBottomInset: false,
         body: LayoutBuilder(builder: (context, constraints) {
           if (constraints.maxWidth >= 768) {
+            // Tablet View
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -96,8 +97,15 @@ class _RegisterState extends State<Register> {
                       shadowColor: Colors.greenAccent,
                       color: Colors.green,
                       elevation: 7.0,
+                      // Register Button
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.replace(context,
+                              oldRoute: MaterialPageRoute(
+                                  builder: (context) => Register()),
+                              newRoute: MaterialPageRoute(
+                                  builder: (context) => Login()));
+                        },
                         child: Center(
                           child: Text(
                             'REGISTER',
@@ -126,14 +134,10 @@ class _RegisterState extends State<Register> {
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: InkWell(
+                      // Go Back Button
+                      child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return Login();
-                            }),
-                          );
+                          Navigator.pop(context);
                         },
                         child: Center(
                           child: Text(
@@ -150,6 +154,7 @@ class _RegisterState extends State<Register> {
               ),
             );
           } else {
+            // Mobile View
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -227,8 +232,12 @@ class _RegisterState extends State<Register> {
                       shadowColor: Colors.greenAccent,
                       color: Colors.green,
                       elevation: 7.0,
+                      // Register Button
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => Login()));
+                        },
                         child: Center(
                           child: Text(
                             'REGISTER',
@@ -256,8 +265,11 @@ class _RegisterState extends State<Register> {
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(20.0),
                       ),
+                      // Go Back Button
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
                         child: Center(
                           child: Text(
                             'Go Back',

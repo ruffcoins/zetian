@@ -129,7 +129,7 @@ class _LoginState extends State<Login> {
                               fontFamily: 'Montserrat', fontSize: 15.0),
                         ),
                         SizedBox(width: 5.0),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -146,7 +146,7 @@ class _LoginState extends State<Login> {
                               decoration: TextDecoration.underline,
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -262,8 +262,13 @@ class _LoginState extends State<Login> {
                             TextStyle(fontFamily: 'Montserrat', fontSize: 15.0),
                       ),
                       SizedBox(width: 5.0),
-                      InkWell(
-                        onTap: () {},
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Register()));
+                        },
                         child: Text(
                           'Register',
                           style: TextStyle(
