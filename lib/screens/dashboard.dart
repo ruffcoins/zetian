@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zetian/screens/customer/viewcustomers.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -67,10 +68,12 @@ class _DashboardState extends State<Dashboard> {
                     fontWeight: FontWeight.w500),
               ),
               onTap: () {
-                // Update the state of the app
-                // ...
                 // Then close the drawer
                 Navigator.pop(context);
+
+                // Update the state of the app
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ViewCustomers()));
               },
             ),
             Divider(
@@ -199,42 +202,51 @@ class _DashboardState extends State<Dashboard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.person,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Customers',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    // Customers Button
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewCustomers()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.person,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Customers',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -465,42 +477,50 @@ class _DashboardState extends State<Dashboard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.43,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.person,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Customers',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewCustomers()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.43,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.person,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Customers',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(
