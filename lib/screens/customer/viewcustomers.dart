@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zetian/screens/customer/addcustomer.dart';
 
 class ViewCustomers extends StatefulWidget {
   @override
@@ -279,13 +280,14 @@ class _ViewCustomersState extends State<ViewCustomers> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddCustomer()));
         },
-        label: const Text(
+        label: Text(
           'New Customer',
           style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),
         ),
-        icon: const Icon(
+        icon: Icon(
           Icons.add,
           size: 30.0,
         ),
