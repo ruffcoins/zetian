@@ -19,12 +19,12 @@ class _ViewCustomersState extends State<ViewCustomers> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back)),
+            child: Icon(Icons.arrow_back_ios)),
         title: Center(
           child: Text(
             'Customers',
             style: TextStyle(
-                fontSize: 28.0,
+                fontSize: 25.0,
                 fontFamily: 'Montserrat',
                 color: Colors.green,
                 fontWeight: FontWeight.w600),
