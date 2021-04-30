@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/screens/customer/viewcustomers.dart';
+import 'package:zetian/screens/service/viewservices.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -26,157 +28,7 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
         ),
-        endDrawer: Drawer(
-            child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'New User',
-                    style: TextStyle(
-                        fontSize: 24.0,
-                        color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Phone Number',
-                    style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Colors.green,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Customers',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500),
-              ),
-              onTap: () {
-                // Then close the drawer
-                Navigator.pop(context);
-
-                // Update the state of the app
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ViewCustomers()));
-              },
-            ),
-            Divider(
-              height: 2.0,
-              color: Colors.black45,
-            ),
-            ListTile(
-              title: Text(
-                'Services',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              height: 2.0,
-              color: Colors.black45,
-            ),
-            ListTile(
-              title: Text(
-                'Sales',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              height: 2.0,
-              color: Colors.black45,
-            ),
-            ListTile(
-              title: Text(
-                'Expenses',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              height: 2.0,
-              color: Colors.black45,
-            ),
-            ListTile(
-              title: Text(
-                'Reports',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              height: 2.0,
-              color: Colors.black45,
-            ),
-            ListTile(
-              title: Text(
-                'Employees',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              height: 2.0,
-              color: Colors.black45,
-            ),
-          ],
-        )),
+        endDrawer: SideMenu(),
         body: LayoutBuilder(builder: (context, constraints) {
           if (constraints.maxWidth >= 768) {
             // Tablet View
@@ -249,42 +101,50 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.home_repair_service,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Services',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewServices()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.home_repair_service,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Services',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -523,42 +383,50 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.43,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.home_repair_service,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Services',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewServices()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.43,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.home_repair_service,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Services',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
