@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zetian/screens/customer/updatecustomer.dart';
 
 class CustomerProfile extends StatefulWidget {
   @override
@@ -18,17 +19,55 @@ class _CustomerProfileState extends State<CustomerProfile> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
             )),
         actions: [
           Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.more_vert),
-              )),
+            padding: const EdgeInsets.only(right: 20.0),
+            child: PopupMenuButton(
+              elevation: 10,
+              itemBuilder: (BuildContext context) => [
+                PopupMenuItem(
+                  padding:
+                      EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 30),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UpdateCustomer()));
+                    },
+                    child: Text(
+                      "Update",
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                PopupMenuItem(
+                  padding: EdgeInsets.only(bottom: 30, right: 30, left: 30),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Delete",
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: Colors.red,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
       endDrawer: Drawer(
