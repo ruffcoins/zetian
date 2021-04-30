@@ -346,6 +346,32 @@ class _CustomerProfileState extends State<CustomerProfile> {
                           )
                         ],
                       ),
+                      Container(
+                        color: Colors.white,
+                        width: 1,
+                        height: 22,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '2',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
+                          ),
+                          Text(
+                            'Cars',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.white,
+                                fontSize: 17),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -613,6 +639,32 @@ class _CustomerProfileState extends State<CustomerProfile> {
                           ),
                           Text(
                             'Spent',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.white,
+                                fontSize: 17),
+                          )
+                        ],
+                      ),
+                      Container(
+                        color: Colors.white,
+                        width: 1,
+                        height: 22,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '2',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
+                          ),
+                          Text(
+                            'Cars',
                             style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 color: Colors.white,
