@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/screens/customer/viewcustomers.dart';
+import 'package:zetian/screens/expense/viewexpenses.dart';
 import 'package:zetian/screens/sale/viewsales.dart';
 import 'package:zetian/screens/service/viewservices.dart';
 
@@ -199,42 +200,50 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.account_balance_wallet,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Expenses',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewExpense()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.account_balance_wallet,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Expenses',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -489,42 +498,50 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.43,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.account_balance_wallet,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Expenses',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewExpense()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.43,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.account_balance_wallet,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Expenses',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
