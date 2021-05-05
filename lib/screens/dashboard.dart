@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/screens/customer/viewcustomers.dart';
+import 'package:zetian/screens/sale/viewsales.dart';
 import 'package:zetian/screens/service/viewservices.dart';
 
 class Dashboard extends StatefulWidget {
@@ -152,42 +153,50 @@ class _DashboardState extends State<Dashboard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.attach_money,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Sales',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewSales()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.attach_money,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Sales',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -434,42 +443,50 @@ class _DashboardState extends State<Dashboard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 2.0,
-                              spreadRadius: 2.0,
-                              color: Colors.black26,
-                              offset: Offset(2, 3),
-                            )
-                          ]),
-                      margin: EdgeInsets.all(10.0),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * 0.43,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.attach_money,
-                            size: 40.0,
-                            color: Colors.green,
-                          ),
-                          SizedBox(
-                            height: 14.0,
-                          ),
-                          Text(
-                            'Sales',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewSales()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Colors.black26,
+                                offset: Offset(2, 3),
+                              )
+                            ]),
+                        margin: EdgeInsets.all(10.0),
+                        height: 120,
+                        width: MediaQuery.of(context).size.width * 0.43,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.attach_money,
+                              size: 40.0,
                               color: Colors.green,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              height: 14.0,
+                            ),
+                            Text(
+                              'Sales',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: Colors.green,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(
