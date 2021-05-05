@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Cards extends StatelessWidget {
-  final String title;
-  final String firstField;
-  final String secondField;
-  final String thirdField;
+  final String? title;
+  final String? firstField;
+  final String? secondField;
+  final String? thirdField;
 
   Cards({this.title, this.firstField, this.secondField, this.thirdField});
 
@@ -22,7 +22,7 @@ class Cards extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  title,
+                  title!,
                   style: TextStyle(
                     color: Colors.green,
                     fontFamily: 'Montserrat',
