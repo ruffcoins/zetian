@@ -67,19 +67,6 @@ class _SaleDetailState extends State<SaleDetail> {
                                 ),
                               ],
                             ),
-                            // Row(
-                            //   children: [
-                            //     Text(
-                            //       '05-05-2021',
-                            //       style: TextStyle(
-                            //         fontFamily: 'Montserrat',
-                            //         fontSize: 20,
-                            //         color: Colors.white,
-                            //         fontWeight: FontWeight.w500,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // )
                           ],
                         ),
                       )
@@ -424,19 +411,6 @@ class _SaleDetailState extends State<SaleDetail> {
                                 ),
                               ],
                             ),
-                            // Row(
-                            //   children: [
-                            //     Text(
-                            //       '05-05-2021',
-                            //       style: TextStyle(
-                            //         fontFamily: 'Montserrat',
-                            //         fontSize: 20,
-                            //         color: Colors.white,
-                            //         fontWeight: FontWeight.w500,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // )
                           ],
                         ),
                       )
@@ -462,17 +436,37 @@ class _SaleDetailState extends State<SaleDetail> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Car Registration Number',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
+                            Text(
+                              'ID',
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              '1',
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'Car Registration Number',
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
                                   'fkj-789-lk',
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
