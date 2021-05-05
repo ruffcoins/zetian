@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/screens/customer/viewcustomers.dart';
 import 'package:zetian/screens/dashboard.dart';
+import 'package:zetian/screens/expense/viewexpenses.dart';
 import 'package:zetian/screens/sale/viewsales.dart';
 import 'package:zetian/screens/service/viewservices.dart';
 
@@ -76,7 +77,7 @@ class SideMenu extends StatelessWidget {
             Navigator.pop(context);
 
             // Update the state of the app
-            Navigator.push(context,
+            Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => ViewCustomers()));
           },
         ),
@@ -97,7 +98,7 @@ class SideMenu extends StatelessWidget {
             Navigator.pop(context);
 
             // Update the state of the app
-            Navigator.push(context,
+            Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => ViewServices()));
           },
         ),
@@ -118,7 +119,7 @@ class SideMenu extends StatelessWidget {
             Navigator.pop(context);
 
             // Update the state of the app
-            Navigator.push(
+            Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => ViewSales()));
           },
         ),
@@ -139,6 +140,8 @@ class SideMenu extends StatelessWidget {
             // ...
             // Then close the drawer
             Navigator.pop(context);
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => ViewExpense()));
           },
         ),
         Divider(
