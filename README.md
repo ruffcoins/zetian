@@ -1,6 +1,6 @@
 # zetian
 
-A Car wash managemnt application
+A Car wash management application
 
 ## Getting Started
 

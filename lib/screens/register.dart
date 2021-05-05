@@ -224,20 +224,21 @@ class _RegisterState extends State<Register> {
                         ],
                       )),
                   SizedBox(height: 40.0),
-                  Container(
-                    padding: EdgeInsets.only(left: 40.0, right: 40.0),
-                    height: 40.0,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.greenAccent,
-                      color: Colors.green,
-                      elevation: 7.0,
-                      // Register Button
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => Login()));
-                        },
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Login()));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                      height: 40.0,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.greenAccent,
+                        color: Colors.green,
+                        elevation: 7.0,
+                        // Register Button
                         child: Center(
                           child: Text(
                             'REGISTER',
@@ -251,25 +252,25 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   SizedBox(height: 20.0),
-                  Container(
-                    padding: EdgeInsets.only(left: 40.0, right: 40.0),
-                    height: 40.0,
-                    color: Colors.transparent,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          style: BorderStyle.solid,
-                          width: 1.0,
+                      padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                      height: 40.0,
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                            style: BorderStyle.solid,
+                            width: 1.0,
+                          ),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      // Go Back Button
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
+                        // Go Back Button
                         child: Center(
                           child: Text(
                             'Go Back',
