@@ -37,6 +37,7 @@ class _ServiceProfileState extends State<ServiceProfile> {
                       EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 30),
                   child: GestureDetector(
                     onTap: () {
+                      Navigator.pop(context);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
