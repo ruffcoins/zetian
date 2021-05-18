@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zetian/partials/sidemenu.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:zetian/partials/sidemenu.dart';
 
 class GenerateSaleSummary extends StatefulWidget {
   @override

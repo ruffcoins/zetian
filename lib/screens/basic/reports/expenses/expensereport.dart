@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/reports/sales/generatesaledetail.dart';
-import 'package:zetian/screens/reports/sales/generatesalesummary.dart';
+import 'package:zetian/screens/basic/reports/expenses/generateexpensedetail.dart';
+import 'package:zetian/screens/basic/reports/expenses/generateexpensesummary.dart';
 
-class SalesReport extends StatefulWidget {
+class ExpensesReport extends StatefulWidget {
   @override
-  _SalesReportState createState() => _SalesReportState();
+  _ExpensesReportState createState() => _ExpensesReportState();
 }
 
-class _SalesReportState extends State<SalesReport> {
-  bool salesReport = true;
-
+class _ExpensesReportState extends State<ExpensesReport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +22,7 @@ class _SalesReportState extends State<SalesReport> {
             child: Icon(Icons.arrow_back_ios)),
         title: Center(
           child: Text(
-            'Sales Reports',
+            'Expenses Reports',
             style: TextStyle(
                 fontSize: 25.0,
                 fontFamily: 'Montserrat',
@@ -54,7 +52,7 @@ class _SalesReportState extends State<SalesReport> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => GenerateSaleSummary(),
+                                builder: (context) => GenerateExpenseSummary(),
                               ));
                         },
                         child: Container(
@@ -102,7 +100,7 @@ class _SalesReportState extends State<SalesReport> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => GenerateSaleDetail(),
+                                builder: (context) => GenerateExpenseDetail(),
                               ));
                         },
                         child: Container(
@@ -167,7 +165,7 @@ class _SalesReportState extends State<SalesReport> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GenerateSaleSummary(),
+                            builder: (context) => GenerateExpenseSummary(),
                           ));
                     },
                     child: Container(
@@ -215,7 +213,7 @@ class _SalesReportState extends State<SalesReport> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GenerateSaleDetail(),
+                            builder: (context) => GenerateExpenseDetail(),
                           ));
                     },
                     child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zetian/screens/service/updateservice.dart';
+import 'package:zetian/screens/basic/service/updateservice.dart';
 
 class ServiceProfile extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/service/serviceprofile.dart';
+import 'package:zetian/screens/basic/service/serviceprofile.dart';
 
 class UpdateService extends StatefulWidget {
   @override

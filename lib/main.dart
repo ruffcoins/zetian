@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zetian/screens/login.dart';
+
+import 'screens/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: Login(),
+      // routes: {
+      //   'dashboard'
+      // },
     );
   }
 }

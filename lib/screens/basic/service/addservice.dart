@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/expense/expensedetail.dart';
+import 'package:zetian/screens/basic/service/serviceprofile.dart';
 
-class NewExpense extends StatefulWidget {
+class AddService extends StatefulWidget {
   @override
-  _NewExpenseState createState() => _NewExpenseState();
+  _AddServiceState createState() => _AddServiceState();
 }
 
-class _NewExpenseState extends State<NewExpense> {
-  final dateController = TextEditingController();
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed
-    dateController.dispose();
-    super.dispose();
-  }
-
+class _AddServiceState extends State<AddService> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +21,7 @@ class _NewExpenseState extends State<NewExpense> {
             child: Icon(Icons.arrow_back_ios)),
         title: Center(
           child: Text(
-            'New Expense',
+            ' Add Service',
             style: TextStyle(
                 fontSize: 25.0,
                 fontFamily: 'Montserrat',
@@ -51,7 +42,7 @@ class _NewExpenseState extends State<NewExpense> {
                 Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         constraints: BoxConstraints(maxWidth: 700),
@@ -60,18 +51,14 @@ class _NewExpenseState extends State<NewExpense> {
                           margin: EdgeInsets.only(
                               top: 30.0, left: 40.0, right: 40.0),
                           child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 10.0,
-                                  left: 20.0,
-                                  right: 20.0,
-                                  bottom: 40.0),
+                              padding: EdgeInsets.all(40.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      'Expense Details',
+                                      'Service Details',
                                       style: TextStyle(
                                         color: Colors.green,
                                         fontFamily: 'Montserrat',
@@ -82,18 +69,7 @@ class _NewExpenseState extends State<NewExpense> {
                                   ),
                                   TextField(
                                     decoration: InputDecoration(
-                                        labelText: "EXPENSE",
-                                        labelStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey),
-                                        focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.green))),
-                                  ),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                        labelText: "PURPOSE",
+                                        labelText: "SERVICE NAME",
                                         labelStyle: TextStyle(
                                             fontFamily: 'Montserrat',
                                             fontWeight: FontWeight.bold,
@@ -113,72 +89,38 @@ class _NewExpenseState extends State<NewExpense> {
                                             borderSide: BorderSide(
                                                 color: Colors.green))),
                                   ),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                        labelText: "EMPLOYEE",
-                                        labelStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey),
-                                        focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.green))),
-                                  ),
-                                  TextField(
-                                    readOnly: true,
-                                    controller: dateController,
-                                    decoration: InputDecoration(
-                                        hintText: 'DATE',
-                                        hintStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey),
-                                        focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.green))),
-                                    onTap: () async {
-                                      var date = await showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100));
-                                      dateController.text =
-                                          date.toString().substring(0, 10);
-                                    },
-                                  ),
                                 ],
                               )),
                         ),
                       ),
                       SizedBox(height: 40.0),
-                      Container(
-                        constraints: BoxConstraints(maxWidth: 700),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ExpenseDetail(),
-                                ));
-                          },
-                          child: Container(
-                            padding: EdgeInsets.only(left: 40.0, right: 40.0),
-                            height: 40.0,
-                            child: Material(
-                              borderRadius: BorderRadius.circular(20.0),
-                              shadowColor: Colors.greenAccent,
-                              color: Colors.green,
-                              elevation: 7.0,
-                              // Register Button
-                              child: Center(
-                                child: Text(
-                                  'SAVE',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.bold),
-                                ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ServiceProfile(),
+                              ));
+                        },
+                        child: Container(
+                          constraints: BoxConstraints(maxWidth: 700),
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          // padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                          height: 40.0,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.greenAccent,
+                            color: Colors.green,
+                            elevation: 7.0,
+                            // Register Button
+                            child: Center(
+                              child: Text(
+                                'SAVE',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -217,7 +159,7 @@ class _NewExpenseState extends State<NewExpense> {
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Text(
-                                    'Expense Details',
+                                    'Service Details',
                                     style: TextStyle(
                                       color: Colors.green,
                                       fontFamily: 'Montserrat',
@@ -228,18 +170,7 @@ class _NewExpenseState extends State<NewExpense> {
                                 ),
                                 TextField(
                                   decoration: InputDecoration(
-                                      labelText: "EXPENSE",
-                                      labelStyle: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey),
-                                      focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.green))),
-                                ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                      labelText: "PURPOSE",
+                                      labelText: "SERVICE NAME",
                                       labelStyle: TextStyle(
                                           fontFamily: 'Montserrat',
                                           fontWeight: FontWeight.bold,
@@ -259,39 +190,6 @@ class _NewExpenseState extends State<NewExpense> {
                                           borderSide:
                                               BorderSide(color: Colors.green))),
                                 ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                      labelText: "EMPLOYEE",
-                                      labelStyle: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey),
-                                      focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.green))),
-                                ),
-                                TextField(
-                                  readOnly: true,
-                                  controller: dateController,
-                                  decoration: InputDecoration(
-                                      hintText: 'DATE',
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey),
-                                      focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.green))),
-                                  onTap: () async {
-                                    var date = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100));
-                                    dateController.text =
-                                        date.toString().substring(0, 10);
-                                  },
-                                ),
                               ],
                             )),
                       ),
@@ -302,7 +200,7 @@ class _NewExpenseState extends State<NewExpense> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ExpenseDetail(),
+                                builder: (context) => ServiceProfile(),
                               ));
                         },
                         child: Container(

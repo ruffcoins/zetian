@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/customer/customerprofile.dart';
+import 'package:zetian/screens/basic/customer/customerprofile.dart';
 
 class AddCustomer extends StatefulWidget {
   @override

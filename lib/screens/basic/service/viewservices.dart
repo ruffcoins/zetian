@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/customer/addcustomer.dart';
+import 'package:zetian/screens/basic/service/addservice.dart';
 
-class ViewCustomers extends StatefulWidget {
+class ViewServices extends StatefulWidget {
   @override
-  _ViewCustomersState createState() => _ViewCustomersState();
+  _ViewServicesState createState() => _ViewServicesState();
 }
 
-class _ViewCustomersState extends State<ViewCustomers> {
-  bool customerList = true;
+class _ViewServicesState extends State<ViewServices> {
+  bool serviceList = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
             child: Icon(Icons.arrow_back_ios)),
         title: Center(
           child: Text(
-            'Customers',
+            'Services',
             style: TextStyle(
                 fontSize: 25.0,
                 fontFamily: 'Montserrat',
@@ -39,15 +39,15 @@ class _ViewCustomersState extends State<ViewCustomers> {
             //
             // Tablet View
             //
-            // If Customers list is empty show the empty customer screen
-            if (customerList == false) {
+            // If service list is empty show the empty service screen
+            if (serviceList == false) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   // crossAxisAlignment: CrossAxisAlignment.center ,
                   children: [
                     Text(
-                      'No Customers',
+                      'No Services',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,
@@ -62,7 +62,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
                 ),
               );
             } else {
-              // If Customers list is not empty, show customer list
+              // If service list is not empty, show service list
               return Center(
                 child: Container(
                   padding: EdgeInsets.only(top: 20.0, bottom: 50.0),
@@ -73,8 +73,24 @@ class _ViewCustomersState extends State<ViewCustomers> {
                       return Card(
                         //                           <-- Card widget
                         child: ListTile(
-                          leading: Icon(Icons.person),
-                          title: Text('Customer Name'),
+                          leading: Icon(
+                            Icons.home_repair_service,
+                            size: 25,
+                          ),
+                          title: Text(
+                            'Service Name',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18),
+                          ),
+                          trailing: Text(
+                            '5000',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
                         ),
                       );
                     },
@@ -86,15 +102,15 @@ class _ViewCustomersState extends State<ViewCustomers> {
             //
             // Mobile View
             //
-            // If Customers list is empty show the empty customer screen
-            if (customerList == false) {
+            // If service list is empty show the empty service screen
+            if (serviceList == false) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   // crossAxisAlignment: CrossAxisAlignment.center ,
                   children: [
                     Text(
-                      'No Customers',
+                      'No Services',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,
@@ -109,7 +125,7 @@ class _ViewCustomersState extends State<ViewCustomers> {
                 ),
               );
             } else {
-              // If Customers list is not empty, show customer list
+              // If Service list is not empty, show service list
               return Container(
                 padding: EdgeInsets.only(bottom: 70.0),
                 child: ListView.builder(
@@ -118,8 +134,24 @@ class _ViewCustomersState extends State<ViewCustomers> {
                     return Card(
                       //                           <-- Card widget
                       child: ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text('Customer Name'),
+                        leading: Icon(
+                          Icons.home_repair_service,
+                          size: 25,
+                        ),
+                        title: Text(
+                          'Service Name',
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18),
+                        ),
+                        trailing: Text(
+                          '5000',
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
                       ),
                     );
                   },
@@ -132,10 +164,10 @@ class _ViewCustomersState extends State<ViewCustomers> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddCustomer()));
+              context, MaterialPageRoute(builder: (context) => AddService()));
         },
         label: Text(
-          'New Customer',
+          'New Service',
           style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),
         ),
         icon: Icon(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/sale/saledetail.dart';
+import 'package:zetian/screens/basic/sale/saledetail.dart';
 
 class NewSale extends StatefulWidget {
   @override

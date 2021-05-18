@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/employee/employeeprofile.dart';
+import 'package:zetian/screens/basic/employee/employeeprofile.dart';
 
 // ignore: must_be_immutable
 class UpdateEmployee extends StatefulWidget {

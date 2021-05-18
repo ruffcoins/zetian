@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/expense/expenselist.dart';
-import 'package:zetian/screens/expense/newexpense.dart';
+import 'package:zetian/screens/basic/expense/expenselist.dart';
+import 'package:zetian/screens/basic/expense/newexpense.dart';
 
 class ViewExpense extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:zetian/screens/dashboard.dart';
+import 'package:zetian/screens/basic/dashboard.dart';
 import 'package:zetian/screens/register.dart';
 
 class Login extends StatefulWidget {
@@ -9,6 +9,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final FocusNode passwordField = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,9 +64,10 @@ class _LoginState extends State<Login> {
                           EdgeInsets.only(top: 35.0, left: 40.0, right: 40.0),
                       child: Column(
                         children: [
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                                labelText: "USERNAME",
+                                labelText: "EMAIL",
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
@@ -72,9 +75,14 @@ class _LoginState extends State<Login> {
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.green))),
+                            onEditingComplete: () {
+                              FocusScope.of(context)
+                                  .requestFocus(passwordField);
+                            },
                           ),
                           SizedBox(height: 10.0),
-                          TextField(
+                          TextFormField(
+                            focusNode: passwordField,
                             decoration: InputDecoration(
                                 labelText: "PASSWORD",
                                 labelStyle: TextStyle(
@@ -197,9 +205,10 @@ class _LoginState extends State<Login> {
                           EdgeInsets.only(top: 35.0, left: 40.0, right: 40.0),
                       child: Column(
                         children: [
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                                labelText: "USERNAME",
+                                labelText: "EMAIL",
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
@@ -207,9 +216,14 @@ class _LoginState extends State<Login> {
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.green))),
+                            onEditingComplete: () {
+                              FocusScope.of(context)
+                                  .requestFocus(passwordField);
+                            },
                           ),
                           SizedBox(height: 10.0),
-                          TextField(
+                          TextFormField(
+                            focusNode: passwordField,
                             decoration: InputDecoration(
                                 labelText: "PASSWORD",
                                 labelStyle: TextStyle(

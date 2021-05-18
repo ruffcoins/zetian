@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zetian/screens/customer/updatecustomer.dart';
+import 'package:zetian/screens/basic/customer/updatecustomer.dart';
 
 class CustomerProfile extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/reports/expenses/expensereport.dart';
-import 'package:zetian/screens/reports/sales/salesreport.dart';
+import 'package:zetian/screens/basic/reports/expenses/expensereport.dart';
+import 'package:zetian/screens/basic/reports/sales/salesreport.dart';
 
 class ReportList extends StatefulWidget {
   @override

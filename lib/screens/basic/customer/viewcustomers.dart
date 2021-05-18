@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/employee/addemployee.dart';
+import 'package:zetian/screens/basic/customer/addcustomer.dart';
 
-class ViewEmployees extends StatefulWidget {
+class ViewCustomers extends StatefulWidget {
   @override
-  _ViewEmployeesState createState() => _ViewEmployeesState();
+  _ViewCustomersState createState() => _ViewCustomersState();
 }
 
-class _ViewEmployeesState extends State<ViewEmployees> {
-  bool employeeList = true;
+class _ViewCustomersState extends State<ViewCustomers> {
+  bool customerList = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _ViewEmployeesState extends State<ViewEmployees> {
             child: Icon(Icons.arrow_back_ios)),
         title: Center(
           child: Text(
-            'Employees',
+            'Customers',
             style: TextStyle(
                 fontSize: 25.0,
                 fontFamily: 'Montserrat',
@@ -39,15 +39,15 @@ class _ViewEmployeesState extends State<ViewEmployees> {
             //
             // Tablet View
             //
-            // If Employee list is empty show the empty employee screen
-            if (employeeList == false) {
+            // If Customers list is empty show the empty customer screen
+            if (customerList == false) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   // crossAxisAlignment: CrossAxisAlignment.center ,
                   children: [
                     Text(
-                      'No Employees',
+                      'No Customers',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,
@@ -62,7 +62,7 @@ class _ViewEmployeesState extends State<ViewEmployees> {
                 ),
               );
             } else {
-              // If Employee list is not empty, show employee list
+              // If Customers list is not empty, show customer list
               return Center(
                 child: Container(
                   padding: EdgeInsets.only(top: 20.0, bottom: 50.0),
@@ -73,8 +73,8 @@ class _ViewEmployeesState extends State<ViewEmployees> {
                       return Card(
                         //                           <-- Card widget
                         child: ListTile(
-                          leading: Icon(Icons.emoji_people),
-                          title: Text('Employee Name'),
+                          leading: Icon(Icons.person),
+                          title: Text('Customer Name'),
                         ),
                       );
                     },
@@ -86,14 +86,15 @@ class _ViewEmployeesState extends State<ViewEmployees> {
             //
             // Mobile View
             //
-            if (employeeList == false) {
+            // If Customers list is empty show the empty customer screen
+            if (customerList == false) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   // crossAxisAlignment: CrossAxisAlignment.center ,
                   children: [
                     Text(
-                      'No Employees',
+                      'No Customers',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,
@@ -108,7 +109,7 @@ class _ViewEmployeesState extends State<ViewEmployees> {
                 ),
               );
             } else {
-              // If Employee list is not empty, show Employee list
+              // If Customers list is not empty, show customer list
               return Container(
                 padding: EdgeInsets.only(bottom: 70.0),
                 child: ListView.builder(
@@ -117,8 +118,8 @@ class _ViewEmployeesState extends State<ViewEmployees> {
                     return Card(
                       //                           <-- Card widget
                       child: ListTile(
-                        leading: Icon(Icons.emoji_people),
-                        title: Text('Employee Name'),
+                        leading: Icon(Icons.person),
+                        title: Text('Customer Name'),
                       ),
                     );
                   },
@@ -131,10 +132,10 @@ class _ViewEmployeesState extends State<ViewEmployees> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddEmployee()));
+              context, MaterialPageRoute(builder: (context) => AddCustomer()));
         },
         label: Text(
-          'New Employee',
+          'New Customer',
           style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),
         ),
         icon: Icon(

@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:zetian/screens/login.dart';
 
 class Register extends StatefulWidget {
+  // late String _email;
+  // late String _password;
+
   @override
   _RegisterState createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
+  final FocusNode passwordField = FocusNode();
+  final FocusNode confirmPasswordField = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +57,10 @@ class _RegisterState extends State<Register> {
                           EdgeInsets.only(top: 10.0, left: 40.0, right: 40.0),
                       child: Column(
                         children: [
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                                labelText: "USERNAME",
+                                labelText: "EMAIL",
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
@@ -61,8 +68,19 @@ class _RegisterState extends State<Register> {
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.green))),
+                            onEditingComplete: () {
+                              FocusScope.of(context)
+                                  .requestFocus(passwordField);
+                            },
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _email = value;
+                            //   });
+                            // },
                           ),
-                          TextField(
+                          TextFormField(
+                            focusNode: passwordField,
+                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
                                 labelText: "PASSWORD",
                                 labelStyle: TextStyle(
@@ -73,10 +91,20 @@ class _RegisterState extends State<Register> {
                                     borderSide:
                                         BorderSide(color: Colors.green))),
                             obscureText: true,
+                            onEditingComplete: () {
+                              FocusScope.of(context)
+                                  .requestFocus(confirmPasswordField);
+                            },
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _password = value;
+                            //   });
+                            // },
                           ),
-                          TextField(
+                          TextFormField(
+                            focusNode: confirmPasswordField,
                             decoration: InputDecoration(
-                                labelText: "PHONE NUMBER",
+                                labelText: "CONFIRM PASSWORD",
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
@@ -84,7 +112,13 @@ class _RegisterState extends State<Register> {
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.green))),
-                          )
+                            obscureText: true,
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _password = value;
+                            //   });
+                            // },
+                          ),
                         ],
                       )),
                   SizedBox(height: 40.0),
@@ -185,9 +219,10 @@ class _RegisterState extends State<Register> {
                           EdgeInsets.only(top: 10.0, left: 40.0, right: 40.0),
                       child: Column(
                         children: [
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                                labelText: "USERNAME",
+                                labelText: "EMAIL",
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
@@ -195,8 +230,19 @@ class _RegisterState extends State<Register> {
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.green))),
+                            onEditingComplete: () {
+                              FocusScope.of(context)
+                                  .requestFocus(passwordField);
+                            },
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _email = value;
+                            //   });
+                            // },
                           ),
-                          TextField(
+                          TextFormField(
+                            focusNode: passwordField,
+                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
                                 labelText: "PASSWORD",
                                 labelStyle: TextStyle(
@@ -207,10 +253,20 @@ class _RegisterState extends State<Register> {
                                     borderSide:
                                         BorderSide(color: Colors.green))),
                             obscureText: true,
+                            onEditingComplete: () {
+                              FocusScope.of(context)
+                                  .requestFocus(confirmPasswordField);
+                            },
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _password = value;
+                            //   });
+                            // },
                           ),
-                          TextField(
+                          TextFormField(
+                            focusNode: confirmPasswordField,
                             decoration: InputDecoration(
-                                labelText: "PHONE NUMBER",
+                                labelText: "CONFIRM PASSWORD",
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
@@ -218,15 +274,29 @@ class _RegisterState extends State<Register> {
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.green))),
-                          )
+                            obscureText: true,
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _password = value;
+                            //   });
+                            // },
+                          ),
                         ],
                       )),
                   SizedBox(height: 40.0),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Login()));
+                      // FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      //   email: _email,
+                      //   password: _password
+                      // ).then((signedInUser) {
+                      //
+                      // }).catchError((e) {
+                      //   print(e);
+                      // });
+                      // Navigator.pop(context);
+                      // Navigator.pushReplacement(context,
+                      //     MaterialPageRoute(builder: (context) => Login()));
                     },
                     child: Container(
                       padding: EdgeInsets.only(left: 40.0, right: 40.0),

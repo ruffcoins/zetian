@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:zetian/partials/sidemenu.dart';
-import 'package:zetian/screens/reports/expenses/generateexpensedetail.dart';
-import 'package:zetian/screens/reports/expenses/generateexpensesummary.dart';
+import 'package:zetian/screens/basic/reports/sales/generatesaledetail.dart';
+import 'package:zetian/screens/basic/reports/sales/generatesalesummary.dart';
 
-class ExpensesReport extends StatefulWidget {
+class SalesReport extends StatefulWidget {
   @override
-  _ExpensesReportState createState() => _ExpensesReportState();
+  _SalesReportState createState() => _SalesReportState();
 }
 
-class _ExpensesReportState extends State<ExpensesReport> {
+class _SalesReportState extends State<SalesReport> {
+  bool salesReport = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class _ExpensesReportState extends State<ExpensesReport> {
             child: Icon(Icons.arrow_back_ios)),
         title: Center(
           child: Text(
-            'Expenses Reports',
+            'Sales Reports',
             style: TextStyle(
                 fontSize: 25.0,
                 fontFamily: 'Montserrat',
@@ -52,7 +54,7 @@ class _ExpensesReportState extends State<ExpensesReport> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => GenerateExpenseSummary(),
+                                builder: (context) => GenerateSaleSummary(),
                               ));
                         },
                         child: Container(
@@ -100,7 +102,7 @@ class _ExpensesReportState extends State<ExpensesReport> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => GenerateExpenseDetail(),
+                                builder: (context) => GenerateSaleDetail(),
                               ));
                         },
                         child: Container(
@@ -149,7 +151,6 @@ class _ExpensesReportState extends State<ExpensesReport> {
               ),
             ),
           );
-          ;
         } else {
           //
           // Mobile View
@@ -166,7 +167,7 @@ class _ExpensesReportState extends State<ExpensesReport> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GenerateExpenseSummary(),
+                            builder: (context) => GenerateSaleSummary(),
                           ));
                     },
                     child: Container(
@@ -214,7 +215,7 @@ class _ExpensesReportState extends State<ExpensesReport> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GenerateExpenseDetail(),
+                            builder: (context) => GenerateSaleDetail(),
                           ));
                     },
                     child: Container(

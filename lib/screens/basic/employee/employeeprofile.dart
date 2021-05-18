@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zetian/screens/employee/updateemployee.dart';
+import 'package:zetian/screens/basic/employee/updateemployee.dart';
 
 class EmployeeProfile extends StatefulWidget {
   @override
