@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "235651404413",
+    "project_id": "zetian",
+    "storage_bucket": "zetian.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235651404413:android:0939bceeb1970878e9d714",
+        "android_client_info": {
+          "package_name": "com.example.zetian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235651404413-2d3okmfkq0nr9mldn7qe7u9f7g9eue6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyNo3Xby9PJOjbV9xGLK6msaOyfbu4DmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235651404413-2d3okmfkq0nr9mldn7qe7u9f7g9eue6q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
