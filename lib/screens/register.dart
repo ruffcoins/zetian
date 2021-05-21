@@ -1,15 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:zetian/screens/login.dart';
 
 class Register extends StatefulWidget {
-  // late String _email;
-  // late String _password;
 
   @override
   _RegisterState createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
+  late String _email, _password;
+  final auth = FirebaseAuth.instance;
+
   final FocusNode passwordField = FocusNode();
   final FocusNode confirmPasswordField = FocusNode();
 
@@ -41,7 +42,7 @@ class _RegisterState extends State<Register> {
                                       ))),
                               Container(
                                   padding:
-                                      EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+                                  EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
                                   child: Text(".",
                                       style: TextStyle(
                                           fontSize: 80.0,
@@ -54,7 +55,7 @@ class _RegisterState extends State<Register> {
                   Container(
                       constraints: BoxConstraints(maxWidth: 700),
                       padding:
-                          EdgeInsets.only(top: 10.0, left: 40.0, right: 40.0),
+                      EdgeInsets.only(top: 10.0, left: 40.0, right: 40.0),
                       child: Column(
                         children: [
                           TextFormField(
@@ -67,7 +68,7 @@ class _RegisterState extends State<Register> {
                                     color: Colors.grey),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Colors.green))),
+                                    BorderSide(color: Colors.green))),
                             onEditingComplete: () {
                               FocusScope.of(context)
                                   .requestFocus(passwordField);
@@ -89,7 +90,7 @@ class _RegisterState extends State<Register> {
                                     color: Colors.grey),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Colors.green))),
+                                    BorderSide(color: Colors.green))),
                             obscureText: true,
                             onEditingComplete: () {
                               FocusScope.of(context)
@@ -111,7 +112,7 @@ class _RegisterState extends State<Register> {
                                     color: Colors.grey),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Colors.green))),
+                                    BorderSide(color: Colors.green))),
                             obscureText: true,
                             // onChanged: (value) {
                             //   setState(() {
@@ -123,11 +124,17 @@ class _RegisterState extends State<Register> {
                       )),
                   SizedBox(height: 40.0),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Login()));
-                    },
+                    // onTap: () async {
+                    //   try {
+                    //     await auth.(email: _email, password: _password);
+                    //     Navigator.pushReplacement(context,
+                    //         MaterialPageRoute(builder: (context) => Dashboard()));
+                    //
+                    //   } on FirebaseAuthException catch (e) {
+                    //     print('Failed with error code: ${e.code}');
+                    //     print(e.message);
+                    //   }
+                    // },
                     child: Container(
                       constraints: BoxConstraints(maxWidth: 700),
                       padding: EdgeInsets.only(left: 40.0, right: 40.0),
@@ -194,29 +201,29 @@ class _RegisterState extends State<Register> {
                 children: [
                   Container(
                       child: Stack(
-                    children: [
-                      Row(
                         children: [
-                          Container(
-                              padding: EdgeInsets.fromLTRB(34.0, 0.0, 0.0, 0.0),
-                              child: Text("Register",
-                                  style: new TextStyle(
-                                    fontSize: 80.0,
-                                    fontWeight: FontWeight.bold,
-                                  ))),
-                          Container(
-                              child: Text(".",
-                                  style: TextStyle(
-                                      fontSize: 80.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green)))
+                          Row(
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.fromLTRB(34.0, 0.0, 0.0, 0.0),
+                                  child: Text("Register",
+                                      style: new TextStyle(
+                                        fontSize: 80.0,
+                                        fontWeight: FontWeight.bold,
+                                      ))),
+                              Container(
+                                  child: Text(".",
+                                      style: TextStyle(
+                                          fontSize: 80.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.green)))
+                            ],
+                          ),
                         ],
-                      ),
-                    ],
-                  )),
+                      )),
                   Container(
                       padding:
-                          EdgeInsets.only(top: 10.0, left: 40.0, right: 40.0),
+                      EdgeInsets.only(top: 10.0, left: 40.0, right: 40.0),
                       child: Column(
                         children: [
                           TextFormField(
@@ -234,15 +241,14 @@ class _RegisterState extends State<Register> {
                               FocusScope.of(context)
                                   .requestFocus(passwordField);
                             },
-                            // onChanged: (value) {
-                            //   setState(() {
-                            //     _email = value;
-                            //   });
-                            // },
+                            onChanged: (value) {
+                              setState(() {
+                                _email = value.trim();
+                              });
+                            },
                           ),
                           TextFormField(
                             focusNode: passwordField,
-                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
                                 labelText: "PASSWORD",
                                 labelStyle: TextStyle(
@@ -253,50 +259,25 @@ class _RegisterState extends State<Register> {
                                     borderSide:
                                         BorderSide(color: Colors.green))),
                             obscureText: true,
-                            onEditingComplete: () {
-                              FocusScope.of(context)
-                                  .requestFocus(confirmPasswordField);
+                            onChanged: (value) {
+                              setState(() {
+                                _password = value.trim();
+                              });
                             },
-                            // onChanged: (value) {
-                            //   setState(() {
-                            //     _password = value;
-                            //   });
-                            // },
-                          ),
-                          TextFormField(
-                            focusNode: confirmPasswordField,
-                            decoration: InputDecoration(
-                                labelText: "CONFIRM PASSWORD",
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.green))),
-                            obscureText: true,
-                            // onChanged: (value) {
-                            //   setState(() {
-                            //     _password = value;
-                            //   });
-                            // },
                           ),
                         ],
                       )),
                   SizedBox(height: 40.0),
                   GestureDetector(
-                    onTap: () {
-                      // FirebaseAuth.instance.createUserWithEmailAndPassword(
-                      //   email: _email,
-                      //   password: _password
-                      // ).then((signedInUser) {
-                      //
-                      // }).catchError((e) {
-                      //   print(e);
-                      // });
-                      // Navigator.pop(context);
-                      // Navigator.pushReplacement(context,
-                      //     MaterialPageRoute(builder: (context) => Login()));
+                    onTap: () async {
+                      try {
+                        await auth.createUserWithEmailAndPassword(
+                            email: _email, password: _password);
+                        Navigator.pop(context);
+                      } on FirebaseAuthException catch (e) {
+                        print('Failed with error code: ${e.code}');
+                        print(e.message);
+                      }
                     },
                     child: Container(
                       padding: EdgeInsets.only(left: 40.0, right: 40.0),
