@@ -22,10 +22,10 @@ environment:
 
 dependencies:
 
-  firebase_core:
-  firebase_auth:
-  cloud_firestore:
   provider:
+  uuid:
+  date_format:
+  dio:
 
   flutter:
     sdk: flutter
