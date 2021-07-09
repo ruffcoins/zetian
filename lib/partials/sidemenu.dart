@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:zetian/screens/basic/customer/viewcustomers.dart';
 import 'package:zetian/screens/basic/dashboard.dart';
@@ -10,7 +10,7 @@ import 'package:zetian/screens/basic/service/viewservices.dart';
 import 'package:zetian/screens/login.dart';
 
 class SideMenu extends StatelessWidget {
-  final auth = FirebaseAuth.instance;
+  // final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -218,15 +218,15 @@ class SideMenu extends StatelessWidget {
                         fontFamily: 'Montserrat',
                         color: Colors.red),
                   ),
-                  onTap: () async {
-                    try {
-                      await auth.signOut();
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Login()));
-                    } on FirebaseAuthException catch (e) {
-                      print('Failed with error code: ${e.code}');
-                      print(e.message);
-                    }
+                  onTap: () {
+                    // try {
+                    // await auth.signOut();
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Login()));
+                    // } on FirebaseAuthException catch (e) {
+                    //   print('Failed with error code: ${e.code}');
+                    //   print(e.message);
+                    // }
                   },
                 ),
               ],

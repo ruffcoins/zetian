@@ -1,12 +1,24 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetian/mixins/employee_helper.dart';
+import 'package:zetian/models/employee/read/get_employee_response.dart';
+import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/employee_provider.dart';
 import 'package:zetian/screens/basic/employee/updateemployee.dart';
+import 'package:zetian/screens/basic/employee/viewemployees.dart';
+import 'package:zetian/utils/string_extension.dart';
 
 class EmployeeProfile extends StatefulWidget {
+  Message employeeDetails;
+
+  EmployeeProfile({required this.employeeDetails});
+
   @override
   _EmployeeProfileState createState() => _EmployeeProfileState();
 }
 
-class _EmployeeProfileState extends State<EmployeeProfile> {
+class _EmployeeProfileState extends State<EmployeeProfile> with EmployeeHelper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,14 +46,15 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
               itemBuilder: (BuildContext context) => [
                 PopupMenuItem(
                   padding:
-                      EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 30),
+                  EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 30),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => UpdateEmployee()));
+                              builder: (context) => UpdateEmployee(
+                                  employeeDetails: widget.employeeDetails)));
                     },
                     child: Text(
                       "Update",
@@ -55,7 +68,43 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                 PopupMenuItem(
                   padding: EdgeInsets.only(bottom: 30, right: 30, left: 30),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      AlertDialog alert = AlertDialog(
+                        title: Text("My title"),
+                        content: Text("This is my message."),
+                        actions: [
+                          MaterialButton(
+                              child: Text("OK"),
+                              onPressed: () {
+                                deleteEmployee(
+                                    Provider.of<AppProvider>(context,
+                                            listen: false)
+                                        .dio,
+                                    widget.employeeDetails.id,
+                                    Provider.of<AppProvider>(context,
+                                            listen: false)
+                                        .baseUrl,
+                                    context);
+                                Provider.of<EmployeeProvider>(context,
+                                            listen: false)
+                                        .isLoading
+                                    ? () {}
+                                    : Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewEmployees(),
+                                    ));
+                              }),
+                        ],
+                      );
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return alert;
+                        },
+                      );
+                    },
                     child: Text(
                       "Delete",
                       style: TextStyle(
@@ -90,7 +139,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                         child: CircleAvatar(
                           radius: 40,
                           backgroundImage:
-                              AssetImage('assets/images/customer-image.png'),
+                          AssetImage('assets/images/customer-image.png'),
                         ),
                       ),
                       Padding(
@@ -101,7 +150,8 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                               width: MediaQuery.of(context).size.width * 0.6,
                               child: Text(
-                                'Chibueze Nnaemeka',
+                                widget.employeeDetails.firstName +
+                                    widget.employeeDetails.lastName,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.w600,
@@ -144,181 +194,181 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                 // Next Section
                 Expanded(
                     child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: 15),
-                  padding: EdgeInsets.only(
-                    left: 30,
-                    right: 50,
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius:
+                      width: double.infinity,
+                      margin: EdgeInsets.only(top: 15),
+                      padding: EdgeInsets.only(
+                        left: 30,
+                        right: 50,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
                           BorderRadius.vertical(top: Radius.circular(34))),
-                  child: ListView(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 33, right: 25, left: 25),
-                        child: Text(
-                          'Profile',
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
+                      child: ListView(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 33, right: 25, left: 25),
+                            child: Text(
+                              'Profile',
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 25, left: 25),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Phone Number',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '08054367854',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Address',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '5 Igweze Street, Awka',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Comments',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'Enter Your comments here',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Salary',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '₦100000',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Bank Name',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'United Bank For Africa (UBA)',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Account Number',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '0099887766',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Account Name',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'Christian Chibueze',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                ]),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 25, left: 25),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Phone Number',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                '08054367854',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Address',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                '5 Igweze Street, Awka',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Comments',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Enter Your comments here',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Salary',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                '₦100000',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Bank Name',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'United Bank For Africa (UBA)',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Account Number',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                '0099887766',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Account Name',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Christian Chibueze',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                            ]),
-                      ),
-                    ],
-                  ),
-                ))
+                    ))
               ],
             );
           } else {
@@ -347,7 +397,9 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                           Container(
                             width: MediaQuery.of(context).size.width * 0.6,
                             child: Text(
-                              'Chibueze Nnaemeka',
+                              widget.employeeDetails.firstName.capitalize() +
+                                  " " +
+                                  widget.employeeDetails.lastName.capitalize(),
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontWeight: FontWeight.w600,
@@ -425,7 +477,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                 height: 5,
                               ),
                               Text(
-                                '08054367854',
+                                widget.employeeDetails.phoneNumber,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
@@ -445,7 +497,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                 height: 5,
                               ),
                               Text(
-                                '5 Igweze Street, Awka',
+                                widget.employeeDetails.address,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
@@ -465,7 +517,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                 height: 5,
                               ),
                               Text(
-                                'Enter Your comments here',
+                                widget.employeeDetails.comments,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
@@ -485,7 +537,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                 height: 5,
                               ),
                               Text(
-                                '₦100000',
+                                widget.employeeDetails.salary.toString(),
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
@@ -505,7 +557,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                 height: 5,
                               ),
                               Text(
-                                'United Bank For Africa (UBA)',
+                                widget.employeeDetails.bankName,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
@@ -525,7 +577,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                 height: 5,
                               ),
                               Text(
-                                '0099887766',
+                                widget.employeeDetails.accountNumber,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
@@ -545,7 +597,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                 height: 5,
                               ),
                               Text(
-                                'Christian Chibueze',
+                                widget.employeeDetails.accountName,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
