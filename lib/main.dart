@@ -1,11 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/employee_provider.dart';
+import 'package:zetian/providers/expense_provider.dart';
+import 'package:zetian/providers/service_provider.dart';
+import 'package:zetian/screens/basic/expense/viewexpenses.dart';
 
-import 'screens/login.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
   runApp(MyApp());
 }
 
@@ -13,15 +14,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
+    return MultiProvider(
+      providers: [
+        Provider(create: (_) => AppProvider()),
+        ChangeNotifierProvider(create: (_) => EmployeeProvider()),
+        ChangeNotifierProvider(create: (_) => ServiceProvider()),
+        ChangeNotifierProvider(create: (_) => ExpenseProvider())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: ViewExpense(),
+        // routes: {
+        //   'dashboard'
+        // },
       ),
-      home: Login(),
-      // routes: {
-      //   'dashboard'
-      // },
     );
   }
 }

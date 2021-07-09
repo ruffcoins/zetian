@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetian/mixins/service_helper.dart';
+import 'package:zetian/models/service/read/get_service_response.dart';
+import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/service_provider.dart';
 import 'package:zetian/screens/basic/service/updateservice.dart';
+import 'package:zetian/screens/basic/service/viewservices.dart';
+import 'package:zetian/utils/string_extension.dart';
 
 class ServiceProfile extends StatefulWidget {
+  Message serviceDetails;
+
+  ServiceProfile({required this.serviceDetails});
+
   @override
   _ServiceProfileState createState() => _ServiceProfileState();
 }
 
-class _ServiceProfileState extends State<ServiceProfile> {
+class _ServiceProfileState extends State<ServiceProfile> with ServiceHelper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +52,9 @@ class _ServiceProfileState extends State<ServiceProfile> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => UpdateService()));
+                            builder: (context) => UpdateService(
+                                serviceDetails: widget.serviceDetails),
+                          ));
                     },
                     child: Text(
                       "Update",
@@ -55,7 +68,23 @@ class _ServiceProfileState extends State<ServiceProfile> {
                 PopupMenuItem(
                   padding: EdgeInsets.only(bottom: 30, right: 30, left: 30),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      deleteService(
+                          Provider.of<AppProvider>(context, listen: false).dio,
+                          widget.serviceDetails.id,
+                          Provider.of<AppProvider>(context, listen: false)
+                              .baseUrl,
+                          context);
+                      Provider.of<ServiceProvider>(context, listen: false)
+                              .isLoading
+                          ? () {}
+                          : Navigator.pop(context);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewServices(),
+                          ));
+                    },
                     child: Text(
                       "Delete",
                       style: TextStyle(
@@ -176,7 +205,7 @@ class _ServiceProfileState extends State<ServiceProfile> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Service Name',
+                              widget.serviceDetails.name.capitalizeFirstofEach,
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 30,
@@ -200,7 +229,7 @@ class _ServiceProfileState extends State<ServiceProfile> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              '5000',
+                              widget.serviceDetails.amount.toString(),
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 20,
@@ -216,7 +245,8 @@ class _ServiceProfileState extends State<ServiceProfile> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => UpdateService(),
+                                builder: (context) => UpdateService(
+                                    serviceDetails: widget.serviceDetails),
                               ));
                         },
                         child: Container(
