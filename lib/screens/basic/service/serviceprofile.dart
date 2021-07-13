@@ -229,7 +229,7 @@ class _ServiceProfileState extends State<ServiceProfile> with ServiceHelper {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              widget.serviceDetails.amount.toString(),
+                              '₦' + widget.serviceDetails.amount.toString(),
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 20,

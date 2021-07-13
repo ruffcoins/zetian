@@ -1,13 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetian/mixins/expense_helper.dart';
+import 'package:zetian/models/expense/read/get_expense_response.dart';
 import 'package:zetian/partials/sidemenu.dart';
+import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/employee_provider.dart';
+import 'package:zetian/providers/expense_provider.dart';
+import 'package:zetian/utils/string_extension.dart';
 
 class ExpenseDetail extends StatefulWidget {
+  Message expenseDetails;
+
+  ExpenseDetail({required this.expenseDetails});
+
   @override
   _ExpenseDetailState createState() => _ExpenseDetailState();
 }
 
-class _ExpenseDetailState extends State<ExpenseDetail> {
+class _ExpenseDetailState extends State<ExpenseDetail> with ExpenseHelper {
+  // @override
+  // void initState() {
+  //   print("Employee ID: ${widget.expenseDetails.employeeId}");
+  //   // getOneEmployee(Provider.of<AppProvider>(context, listen: false).dio,
+  //   //     Provider.of<AppProvider>(context, listen: false).baseUrl,
+  //   //     widget.expenseDetails.employeeId,
+  //   //     context);
+  //   super.initState();
+  //
+  //   // employeeName = Provider.of<EmployeeProvider>(context, listen: false).employee == null
+  //   //     ? '' : Provider.of<EmployeeProvider>(context, listen: false).employee!.firstName;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -224,18 +248,27 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
             //
             //Mobile View
             //
-            return Column(
-              children: [
-                Container(
-                  child: Row(
+            return context.watch<ExpenseProvider>().isLoading
+                ? Center(
+                    child: Container(
+                        margin: EdgeInsets.only(top: 30.0, bottom: 30),
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
+                        )))
+                : Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
                           children: [
-                            SizedBox(
-                              height: 10,
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 10,
                             ),
                             Row(
                               children: [
@@ -291,12 +324,12 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                               height: 5,
                             ),
                             Text(
-                              '#1',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                                    widget.expenseDetails.id,
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                             SizedBox(
                               height: 15,
                             ),
@@ -311,12 +344,12 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                               height: 5,
                             ),
                             Text(
-                              'Salaries',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                              widget.expenseDetails.expense.capitalize(),
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                             SizedBox(
                               height: 15,
                             ),
@@ -331,12 +364,13 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                               height: 5,
                             ),
                             Text(
-                              'Employee salary payments',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                              widget.expenseDetails.purpose
+                                        .capitalizeFirstofEach,
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                             SizedBox(
                               height: 15,
                             ),
@@ -351,12 +385,13 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                               height: 5,
                             ),
                             Text(
-                              '₦100000',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                              '₦' +
+                                        widget.expenseDetails.amount.toString(),
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                             SizedBox(
                               height: 15,
                             ),
@@ -371,12 +406,13 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                               height: 5,
                             ),
                             Text(
-                              'Chibueze Nnaemeka',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                              widget.expenseDetails.employeeName
+                                        .capitalizeFirstofEach,
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                             SizedBox(
                               height: 15,
                             ),
@@ -391,12 +427,12 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                               height: 5,
                             ),
                             Text(
-                              '05-05-2021',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                              widget.expenseDetails.date.toString(),
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                             SizedBox(
                               height: 15,
                             ),

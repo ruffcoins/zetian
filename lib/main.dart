@@ -4,7 +4,7 @@ import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
 import 'package:zetian/providers/expense_provider.dart';
 import 'package:zetian/providers/service_provider.dart';
-import 'package:zetian/screens/basic/expense/viewexpenses.dart';
+import 'package:zetian/screens/basic/dashboard.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
-        home: ViewExpense(),
+        home: Dashboard(),
         // routes: {
         //   'dashboard'
         // },

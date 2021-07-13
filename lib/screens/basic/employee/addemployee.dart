@@ -482,9 +482,7 @@ class _AddEmployeeState extends State<AddEmployee> with EmployeeHelper {
                                     builder: (context) => ViewEmployees(),
                                   ));
                         },
-                        child: Provider.of<EmployeeProvider>(context,
-                                    listen: false)
-                                .isLoading
+                        child: context.watch<EmployeeProvider>().isLoading
                             ? Center(
                                 child: Container(
                                     margin:

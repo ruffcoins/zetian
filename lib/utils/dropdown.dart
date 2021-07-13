@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class DropdownType extends StatefulWidget {
-  String? dropdownValue = '';
+  String? dropdownValue;
   List<String> objectList;
   String? current = '';
   Function onChanged;
@@ -36,12 +36,21 @@ class _DropdownTypeState extends State<DropdownType> {
       width: MediaQuery.of(context).size.width * widget.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        color: Colors.green,
+        color: Colors.white,
       ),
       child: DropdownButton<String>(
-        dropdownColor: Colors.green,
+        hint: Text(
+          'SELECT EMPLOYEE',
+          style: TextStyle(
+            fontFamily: 'Montserrat',
+            fontSize: 17,
+            color: Colors.black45,
+          ),
+        ),
+        dropdownColor: Colors.white,
         //focusColor: HexColor('D6E3F8'),
-        value: widget.dropdownValue!,
+        value: widget.dropdownValue,
+        //widget.dropdownValue!,
         icon: Padding(
           padding: const EdgeInsets.only(right: 18.0),
           child: Icon(Icons.arrow_downward),
@@ -53,9 +62,11 @@ class _DropdownTypeState extends State<DropdownType> {
         ),
         isExpanded: true,
         style: TextStyle(
-          color: Colors.white,
-          decorationColor: Colors.white,
-        ),
+            color: Colors.black45,
+            decorationColor: Colors.black45,
+            fontFamily: 'Montserrat',
+            fontSize: 17,
+            fontWeight: FontWeight.bold),
         onChanged: (String? newValue) {
           widget.onChanged(newValue);
           setState(() {
@@ -69,7 +80,7 @@ class _DropdownTypeState extends State<DropdownType> {
           return DropdownMenuItem<String>(
             value: value,
             child: Padding(
-              padding: const EdgeInsets.only(left: 18.0),
+              padding: const EdgeInsets.only(left: 0.0),
               child: Text(value),
             ),
           );

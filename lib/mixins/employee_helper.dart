@@ -51,14 +51,10 @@ mixin EmployeeHelper {
     GetEmployeeResponse employeeResponse = operation.result;
     List<Message> employees = employeeResponse.message;
 
-    print("message before");
-
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
         .updateEmployeeResult(employees);
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
         .updateIsLoading(false);
-    print("message after");
-    print(employees);
   }
 
   deleteEmployee(Dio dio, String id, String baseUrl, BuildContext context) {

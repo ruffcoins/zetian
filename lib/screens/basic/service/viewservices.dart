@@ -177,7 +177,9 @@ class _ViewServicesState extends State<ViewServices> with ServiceHelper {
                                         fontSize: 18),
                                   ),
                                   trailing: Text(
-                                    provider.services[index].amount.toString(),
+                                    '₦' +
+                                        provider.services[index].amount
+                                            .toString(),
                                     style: TextStyle(
                                         fontFamily: 'Montserrat',
                                         fontWeight: FontWeight.bold,

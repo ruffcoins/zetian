@@ -33,7 +33,6 @@ class _EmployeeRepo {
     String url,
     OperationCompleted getCompleted,
   ) {
-    print("new message from employee repo");
     employeeData.getAllEmployees(dio, url).then((employeeData) {
       getCompleted(employeeData);
     });
