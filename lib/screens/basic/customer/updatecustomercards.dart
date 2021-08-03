@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 
 class Cards extends StatelessWidget {
+  final String? id;
   final String? title;
   final String? firstField;
   final String? secondField;
   final String? thirdField;
 
-  Cards({this.title, this.firstField, this.secondField, this.thirdField});
+  /// Input Controllers
+  TextEditingController firstFieldController = TextEditingController();
+  TextEditingController secondFieldController = TextEditingController();
+  TextEditingController thirdFieldController = TextEditingController();
+
+  Cards(
+      {this.id,
+      this.title,
+      this.firstField,
+      this.secondField,
+      this.thirdField});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +43,7 @@ class Cards extends StatelessWidget {
                 ),
               ),
               TextField(
+                controller: firstFieldController,
                 decoration: InputDecoration(
                     labelText: firstField,
                     labelStyle: TextStyle(
@@ -42,6 +54,7 @@ class Cards extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.green))),
               ),
               TextField(
+                controller: secondFieldController,
                 decoration: InputDecoration(
                     labelText: secondField,
                     labelStyle: TextStyle(
@@ -52,6 +65,7 @@ class Cards extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.green))),
               ),
               TextField(
+                controller: thirdFieldController,
                 decoration: InputDecoration(
                     labelText: thirdField,
                     labelStyle: TextStyle(
