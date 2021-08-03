@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zetian/data/employee/employee_data.dart';
 import 'package:zetian/mixins/employee_helper.dart';
 import 'package:zetian/models/employee/read/get_employee_response.dart';
 import 'package:zetian/partials/sidemenu.dart';
@@ -37,7 +36,10 @@ class _ViewEmployeesState extends State<ViewEmployees> with EmployeeHelper {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back_ios)),
+              child: Icon(
+                Icons.arrow_back_ios,
+                size: 30,
+              )),
           title: Center(
             child: Text(
               'Employees',
@@ -130,7 +132,7 @@ class _ViewEmployeesState extends State<ViewEmployees> with EmployeeHelper {
                         .isLoading
                     ? Center(
                         child: CircularProgressIndicator(
-                        strokeWidth: 100,
+                        strokeWidth: 4,
                       ))
                     : Container(
                         padding: EdgeInsets.only(bottom: 70.0),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zetian/mixins/employee_helper.dart';
@@ -45,8 +44,8 @@ class _EmployeeProfileState extends State<EmployeeProfile> with EmployeeHelper {
               elevation: 10,
               itemBuilder: (BuildContext context) => [
                 PopupMenuItem(
-                  padding:
-                  EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 30),
+                    padding:
+                      EdgeInsets.only(top: 30, bottom: 10, right: 30, left: 30),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
@@ -56,62 +55,86 @@ class _EmployeeProfileState extends State<EmployeeProfile> with EmployeeHelper {
                               builder: (context) => UpdateEmployee(
                                   employeeDetails: widget.employeeDetails)));
                     },
-                    child: Text(
-                      "Update",
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                    child: Center(
+                      child: Text(
+                        "Update",
+                        style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
                 PopupMenuItem(
-                  padding: EdgeInsets.only(bottom: 30, right: 30, left: 30),
+                  padding:
+                      EdgeInsets.only(top: 20, bottom: 30, right: 30, left: 30),
                   child: GestureDetector(
-                    onTap: () {
-                      AlertDialog alert = AlertDialog(
-                        title: Text("My title"),
-                        content: Text("This is my message."),
-                        actions: [
-                          MaterialButton(
-                              child: Text("OK"),
-                              onPressed: () {
-                                deleteEmployee(
-                                    Provider.of<AppProvider>(context,
-                                            listen: false)
-                                        .dio,
-                                    widget.employeeDetails.id,
-                                    Provider.of<AppProvider>(context,
-                                            listen: false)
-                                        .baseUrl,
-                                    context);
-                                Provider.of<EmployeeProvider>(context,
-                                            listen: false)
-                                        .isLoading
-                                    ? () {}
-                                    : Navigator.pop(context);
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ViewEmployees(),
-                                    ));
-                              }),
-                        ],
-                      );
-                      showDialog(
+                    onTap: () async {
+                      return await showDialog(
                         context: context,
-                        builder: (context) {
-                          return alert;
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Confirm"),
+                            content: const Text(
+                                "Are you sure you wish to delete this item?"),
+                            actions: <Widget>[
+                              GestureDetector(
+                                  onTap: () {
+                                    deleteEmployee(
+                                        Provider.of<AppProvider>(context,
+                                                listen: false)
+                                            .dio,
+                                        widget.employeeDetails.id,
+                                        Provider.of<AppProvider>(context,
+                                                listen: false)
+                                            .baseUrl,
+                                        context);
+
+                                    Provider.of<EmployeeProvider>(context,
+                                                listen: false)
+                                            .isLoading
+                                        ? () {}
+                                        : Navigator.pop(context);
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ViewEmployees(),
+                                        ));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 10, right: 5),
+                                    child: const Text("Delete",
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold)),
+                                  )),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 10, right: 10),
+                                  child: const Text("CANCEL"),
+                                ),
+                              ),
+                            ],
+                          );
                         },
                       );
                     },
-                    child: Text(
-                      "Delete",
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.red,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                    child: Center(
+                      child: Text(
+                        "Delete",
+                        style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.red,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),

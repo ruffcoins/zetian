@@ -9,7 +9,7 @@ class EmployeeProvider extends ChangeNotifier {
 
   void updateIsLoading(bool isLoadingGotten) {
     isLoading = isLoadingGotten;
-    print(isLoading);
+    print('employee provider is loading');
     notifyListeners();
   }
 
