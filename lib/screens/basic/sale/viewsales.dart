@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetian/mixins/customer_helper.dart';
+import 'package:zetian/mixins/employee_helper.dart';
+import 'package:zetian/mixins/service_helper.dart';
+import 'package:zetian/models/employee/read/get_employee_response.dart';
 import 'package:zetian/partials/sidemenu.dart';
+import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/employee_provider.dart';
+import 'package:zetian/providers/service_provider.dart';
 import 'package:zetian/screens/basic/sale/newsale.dart';
 import 'package:zetian/screens/basic/sale/saleslist.dart';
 
@@ -8,7 +16,30 @@ class ViewSales extends StatefulWidget {
   _ViewSalesState createState() => _ViewSalesState();
 }
 
-class _ViewSalesState extends State<ViewSales> {
+class _ViewSalesState extends State<ViewSales>
+    with ServiceHelper, EmployeeHelper, CustomerHelper {
+  List<String> employeeIDList = [];
+  List<Message> employees = [];
+
+  void initState() {
+    employees = Provider.of<EmployeeProvider>(context, listen: false).employees;
+
+    for (var employee in employees) {
+      employeeIDList.add(employee.id);
+    }
+
+    getAllEmployees(Provider.of<AppProvider>(context, listen: false).dio,
+        Provider.of<AppProvider>(context, listen: false).baseUrl, context);
+
+    getAllCustomers(Provider.of<AppProvider>(context, listen: false).dio,
+        Provider.of<AppProvider>(context, listen: false).baseUrl, context);
+
+    getAllServices(Provider.of<AppProvider>(context, listen: false).dio,
+        Provider.of<AppProvider>(context, listen: false).baseUrl, context);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -477,11 +508,14 @@ class _ViewSalesState extends State<ViewSales> {
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => NewSale(),
-                                ));
+                            Provider.of<ServiceProvider>(context, listen: false)
+                                    .isLoading
+                                ? () {}
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => NewSale(),
+                                    ));
                           },
                           label: Text(
                             'New Sale',

@@ -1,13 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zetian/mixins/sale_helper.dart';
+import 'package:zetian/models/sale/read/get_sale_response.dart';
 import 'package:zetian/partials/sidemenu.dart';
 
 class SaleDetail extends StatefulWidget {
+  SalesResult saleDetails;
+
+  SaleDetail({required this.saleDetails});
+
   @override
   _SaleDetailState createState() => _SaleDetailState();
 }
 
-class _SaleDetailState extends State<SaleDetail> {
+class _SaleDetailState extends State<SaleDetail> with SaleHelper {
+  @override
+  void initState() {
+    print(widget.saleDetails.sale.id);
+    print(widget.saleDetails.sale.carRegNo);
+    print(widget.saleDetails.customer.phoneNumber);
+    print(widget.saleDetails.customer.firstName +
+        " " +
+        widget.saleDetails.customer.lastName);
+    print(widget.saleDetails.service[0].name);
+    print(widget.saleDetails.service[0].amount.toString());
+    print(widget.saleDetails.sale.totalAmount);
+    print(widget.saleDetails.sale.date);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -424,17 +446,18 @@ class _SaleDetailState extends State<SaleDetail> {
                 Expanded(
                     child: Container(
                       width: double.infinity,
-                      margin: EdgeInsets.only(top: 15),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  margin: EdgeInsets.only(top: 15),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
                           BorderRadius.vertical(top: Radius.circular(34))),
-                      child: ListView(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 30, left: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  child: ListView(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 30, left: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                             Text(
                               'ID',
@@ -447,7 +470,7 @@ class _SaleDetailState extends State<SaleDetail> {
                               height: 5,
                             ),
                             Text(
-                              '1',
+                              widget.saleDetails.sale.id,
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 20,
@@ -467,12 +490,12 @@ class _SaleDetailState extends State<SaleDetail> {
                               height: 5,
                             ),
                             Text(
-                                  'fkj-789-lk',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              widget.saleDetails.sale.carRegNo,
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
                                 SizedBox(
                                   height: 15,
                                 ),
@@ -487,12 +510,12 @@ class _SaleDetailState extends State<SaleDetail> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '08032489911',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                                  widget.saleDetails.customer.phoneNumber,
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
                                 SizedBox(
                                   height: 15,
                                 ),
@@ -507,12 +530,14 @@ class _SaleDetailState extends State<SaleDetail> {
                                   height: 5,
                                 ),
                                 Text(
-                                  'Chibueze Nnaemeka',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                                  widget.saleDetails.customer.firstName +
+                                  " " +
+                                  widget.saleDetails.customer.lastName,
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
                                 SizedBox(
                                   height: 15,
                                 ),
@@ -527,189 +552,91 @@ class _SaleDetailState extends State<SaleDetail> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '05-05-2021',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                                  widget.saleDetails.sale.date.toString(),
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
                                 SizedBox(
                                   height: 15,
                                 ),
                               ],
-                            ),
+                        ),
+                      ),
+                      Divider(
+                        height: 2.0,
+                        color: Colors.black87,
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 10),
+                          child: Column(
+                            children: [
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                child: ListView.builder(
+                                    itemCount:
+                                        widget.saleDetails.service.length,
+                                    itemBuilder: (context, index) {
+                                      return ListTile(
+                                        leading: Text(
+                                          (index + 1).toString(),
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 20,
+                                            // fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        title: Text(
+                                          widget
+                                              .saleDetails.service[index].name,
+                                          style: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        // subtitle: Text(
+                                        //   widget.saleDetails.service[index].name,
+                                        //   style: TextStyle(
+                                        //       fontFamily: 'Montserrat',
+                                        //       fontSize: 18,
+                                        //       fontWeight: FontWeight.w500),
+                                        // ),
+                                        trailing: Text(
+                                          '₦' +
+                                              widget.saleDetails.service[index]
+                                                  .amount
+                                                  .toString(),
+                                          style: TextStyle(
+                                              color: Colors.green,
+                                              fontFamily: 'Montserrat',
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                      );
+                                    }),
+                              ),
+                              // SizedBox(
+                              //   height: 40,
+                              // ),
+                            ],
+                          )),
+                      Divider(
+                        height: 2.0,
+                        color: Colors.black87,
+                      ),
+                      ListTile(
+                          title: Text(
+                            'Total',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
-                          Divider(
-                            height: 2.0,
-                            color: Colors.black87,
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.only(left: 10.0, top: 10),
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    leading: Text(
-                                      '1',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 20,
-                                        // fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'Normal Wash',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    subtitle: Text(
-                                      'Nov 7',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    trailing: Text(
-                                      '₦7000',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                  ListTile(
-                                    leading: Text(
-                                      '2',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 20,
-                                        // fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'Normal Wash',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    subtitle: Text(
-                                      'Nov 7',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    trailing: Text(
-                                      '₦7000',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                  ListTile(
-                                    leading: Text(
-                                      '3',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 20,
-                                        // fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'Normal Wash',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    subtitle: Text(
-                                      'Nov 7',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    trailing: Text(
-                                      '₦7000',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                  ListTile(
-                                    leading: Text(
-                                      '4',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 20,
-                                        // fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'Normal Wash',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    subtitle: Text(
-                                      'Nov 7',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    trailing: Text(
-                                      '₦7000',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                  Divider(
-                                    height: 2.0,
-                                    color: Colors.black54,
-                                  ),
-                                  ListTile(
-                                    leading: Text(
-                                      '',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 20,
-                                        // fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'Total',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    trailing: Text(
-                                      '₦28000',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 40,
-                                  ),
-                                ],
-                              )),
-                        ],
+                          trailing: Text('₦' +
+                              widget.saleDetails.sale.totalAmount.toString()))
+                    ],
                       ),
                     ))
               ],
