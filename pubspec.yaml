@@ -26,6 +26,8 @@ dependencies:
   uuid:
   date_format:
   dio:
+  flutter_spinkit:
+  dropdown_search: ^0.6.3
 
   flutter:
     sdk: flutter
