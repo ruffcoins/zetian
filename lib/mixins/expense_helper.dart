@@ -14,12 +14,15 @@ mixin ExpenseHelper {
   createExpense(Dio dio, CreateExpenseRequest request, String baseUrl,
       BuildContext context) {
     _authContext = context;
-
+    Provider.of<ExpenseProvider>(_authContext!, listen: false)
+        .updateIsLoading(true);
     expenseRepo.createExpense(dio, request, baseUrl, _createExpenseCompleted);
   }
 
   _createExpenseCompleted(Operation operation) {
     print("This didn't work at all ${operation.getMessage(_authContext!)}");
+    Provider.of<ExpenseProvider>(_authContext!, listen: false)
+        .updateIsLoading(false);
   }
 
   getAllExpenses(Dio dio, String baseUrl, BuildContext context) {

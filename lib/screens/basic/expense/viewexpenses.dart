@@ -454,9 +454,9 @@ class _ViewExpenseState extends State<ViewExpense> with EmployeeHelper {
                             ? Center(
                                 child: Container(
                                     margin:
-                                        EdgeInsets.only(top: 30.0, bottom: 30),
-                                    width: 50,
-                                    height: 50,
+                                        EdgeInsets.only(top: 30.0, bottom: 10),
+                                    width: 30,
+                                    height: 30,
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                     )))
@@ -465,7 +465,7 @@ class _ViewExpenseState extends State<ViewExpense> with EmployeeHelper {
                                   onPrimary: Colors.green,
                                   primary: Colors.white,
                                   elevation: 20,
-                                  minimumSize: Size(100, 40),
+                                  minimumSize: Size(40, 40),
                                   shadowColor: Colors.black26,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30)),
@@ -554,210 +554,6 @@ class _RecentTransactionsState extends State<RecentTransactions>
   @override
   Widget build(BuildContext context) {
     return Consumer<ExpenseProvider>(builder: (context, provider, child) {
-      /// Static
-      // return Expanded(
-      //     child: Container(
-      //       width: double.infinity,
-      //       margin: EdgeInsets.only(top: 15),
-      //       decoration: BoxDecoration(
-      //           color: Colors.white,
-      //           borderRadius:
-      //           BorderRadius.vertical(top: Radius.circular(34))),
-      //       child: ListView(
-      //         children: [
-      //           Padding(
-      //             padding: EdgeInsets.only(top: 30, left: 30),
-      //             child: Row(
-      //               mainAxisAlignment: MainAxisAlignment.start,
-      //               children: [
-      //                 Text(
-      //                   'Recent Transactions',
-      //                   style: TextStyle(
-      //                       fontFamily: 'Montserrat',
-      //                       fontSize: 23,
-      //                       letterSpacing: 1,
-      //                       fontWeight: FontWeight.w500),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //           Padding(
-      //               padding: const EdgeInsets.all(8.0),
-      //               child: Column(
-      //                 children: [
-      //                   ListTile(
-      //                     leading: Icon(
-      //                       Icons.account_balance_wallet,
-      //                       size: 30,
-      //                     ),
-      //                     title: Text(
-      //                       'Data',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 20,
-      //                           fontWeight: FontWeight.bold),
-      //                     ),
-      //                     subtitle: Text(
-      //                       'Nov 7',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 18,
-      //                           fontWeight: FontWeight.w500),
-      //                     ),
-      //                     trailing: Text(
-      //                       '₦1500',
-      //                       style: TextStyle(
-      //                           color: Colors.red,
-      //                           fontFamily: 'Montserrat',
-      //                           fontWeight: FontWeight.bold,
-      //                           fontSize: 18),
-      //                     ),
-      //                   ),
-      //                   ListTile(
-      //                     leading: Icon(
-      //                       Icons.account_balance_wallet,
-      //                       size: 30,
-      //                     ),
-      //                     title: Text(
-      //                       'New Equipment',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 20,
-      //                           fontWeight: FontWeight.bold),
-      //                     ),
-      //                     subtitle: Text(
-      //                       'Nov 7',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 18,
-      //                           fontWeight: FontWeight.w500),
-      //                     ),
-      //                     trailing: Text(
-      //                       '₦20000',
-      //                       style: TextStyle(
-      //                           color: Colors.red,
-      //                           fontFamily: 'Montserrat',
-      //                           fontWeight: FontWeight.bold,
-      //                           fontSize: 18),
-      //                     ),
-      //                   ),
-      //                   ListTile(
-      //                     leading: Icon(
-      //                       Icons.account_balance_wallet,
-      //                       size: 30,
-      //                     ),
-      //                     title: Text(
-      //                       'Rent',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 20,
-      //                           fontWeight: FontWeight.bold),
-      //                     ),
-      //                     subtitle: Text(
-      //                       'Nov 7',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 18,
-      //                           fontWeight: FontWeight.w500),
-      //                     ),
-      //                     trailing: Text(
-      //                       '₦10000',
-      //                       style: TextStyle(
-      //                           color: Colors.red,
-      //                           fontFamily: 'Montserrat',
-      //                           fontWeight: FontWeight.bold,
-      //                           fontSize: 18),
-      //                     ),
-      //                   ),
-      //                   ListTile(
-      //                     leading: Icon(
-      //                       Icons.account_balance_wallet,
-      //                       size: 30,
-      //                     ),
-      //                     title: Text(
-      //                       'Salary',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 20,
-      //                           fontWeight: FontWeight.bold),
-      //                     ),
-      //                     subtitle: Text(
-      //                       'Nov 7',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 18,
-      //                           fontWeight: FontWeight.w500),
-      //                     ),
-      //                     trailing: Text(
-      //                       '₦100000',
-      //                       style: TextStyle(
-      //                           color: Colors.red,
-      //                           fontFamily: 'Montserrat',
-      //                           fontWeight: FontWeight.bold,
-      //                           fontSize: 18),
-      //                     ),
-      //                   ),
-      //                   ListTile(
-      //                     leading: Icon(
-      //                       Icons.account_balance_wallet,
-      //                       size: 30,
-      //                     ),
-      //                     title: Text(
-      //                       'Detergent',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 20,
-      //                           fontWeight: FontWeight.bold),
-      //                     ),
-      //                     subtitle: Text(
-      //                       'Nov 7',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 18,
-      //                           fontWeight: FontWeight.w500),
-      //                     ),
-      //                     trailing: Text(
-      //                       '₦1000',
-      //                       style: TextStyle(
-      //                           color: Colors.red,
-      //                           fontFamily: 'Montserrat',
-      //                           fontWeight: FontWeight.bold,
-      //                           fontSize: 18),
-      //                     ),
-      //                   ),
-      //                   ListTile(
-      //                     leading: Icon(
-      //                       Icons.account_balance_wallet,
-      //                       size: 30,
-      //                     ),
-      //                     title: Text(
-      //                       'Repairs',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 20,
-      //                           fontWeight: FontWeight.bold),
-      //                     ),
-      //                     subtitle: Text(
-      //                       'Nov 7',
-      //                       style: TextStyle(
-      //                           fontFamily: 'Montserrat',
-      //                           fontSize: 18,
-      //                           fontWeight: FontWeight.w500),
-      //                     ),
-      //                     trailing: Text(
-      //                       '₦9000',
-      //                       style: TextStyle(
-      //                           color: Colors.red,
-      //                           fontFamily: 'Montserrat',
-      //                           fontWeight: FontWeight.bold,
-      //                           fontSize: 18),
-      //                     ),
-      //                   ),
-      //                 ],
-      //               )),
-      //         ],
-      //       ),
-      //     ));
 
       /// Dynamic
       return Expanded(

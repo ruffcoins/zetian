@@ -154,7 +154,7 @@ class _ExpenseListState extends State<ExpenseList> with ExpenseHelper {
                           .isLoading
                       ? Center(
                           child: CircularProgressIndicator(
-                          strokeWidth: 100,
+                          strokeWidth: 4,
                         ))
                       : Container(
                           // padding: EdgeInsets.only(bottom: 70.0),
@@ -170,8 +170,8 @@ class _ExpenseListState extends State<ExpenseList> with ExpenseHelper {
                                           child: Container(
                                               margin: EdgeInsets.only(
                                                   top: 30.0, bottom: 30),
-                                              width: 50,
-                                              height: 50,
+                                              width: 100,
+                                              height: 100,
                                               child: CircularProgressIndicator(
                                                 color: Colors.white,
                                               )))
