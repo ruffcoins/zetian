@@ -146,7 +146,7 @@ class _ViewServicesState extends State<ViewServices> with ServiceHelper {
                         .isLoading
                     ? Center(
                         child: CircularProgressIndicator(
-                        strokeWidth: 100,
+                        strokeWidth: 4,
                       ))
                     : Container(
                         padding: EdgeInsets.only(bottom: 70.0),

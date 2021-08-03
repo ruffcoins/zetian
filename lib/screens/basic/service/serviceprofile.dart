@@ -68,22 +68,49 @@ class _ServiceProfileState extends State<ServiceProfile> with ServiceHelper {
                 PopupMenuItem(
                   padding: EdgeInsets.only(bottom: 30, right: 30, left: 30),
                   child: GestureDetector(
-                    onTap: () {
-                      deleteService(
-                          Provider.of<AppProvider>(context, listen: false).dio,
-                          widget.serviceDetails.id,
-                          Provider.of<AppProvider>(context, listen: false)
-                              .baseUrl,
-                          context);
-                      Provider.of<ServiceProvider>(context, listen: false)
-                              .isLoading
-                          ? () {}
-                          : Navigator.pop(context);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ViewServices(),
-                          ));
+                    onTap: () async {
+                      return await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Confirm"),
+                            content: const Text(
+                                "Are you sure you wish to delete this item?"),
+                            actions: <Widget>[
+                              GestureDetector(
+                                  onTap: () {
+                                    deleteService(
+                                        Provider.of<AppProvider>(context,
+                                                listen: false)
+                                            .dio,
+                                        widget.serviceDetails.id,
+                                        Provider.of<AppProvider>(context,
+                                                listen: false)
+                                            .baseUrl,
+                                        context);
+
+                                    Provider.of<ServiceProvider>(context,
+                                                listen: false)
+                                            .isLoading
+                                        ? () {}
+                                        : Navigator.pop(context);
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ViewServices(),
+                                        ));
+                                  },
+                                  child: const Text("DELETE")),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("CANCEL"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: Text(
                       "Delete",
