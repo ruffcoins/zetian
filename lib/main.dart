@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/customer_provider.dart';
+import 'package:zetian/providers/dashboard_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
 import 'package:zetian/providers/expense_provider.dart';
+import 'package:zetian/providers/sale_provider.dart';
 import 'package:zetian/providers/service_provider.dart';
-import 'package:zetian/screens/basic/dashboard.dart';
+import 'package:zetian/screens/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,14 +22,17 @@ class MyApp extends StatelessWidget {
         Provider(create: (_) => AppProvider()),
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
         ChangeNotifierProvider(create: (_) => ServiceProvider()),
-        ChangeNotifierProvider(create: (_) => ExpenseProvider())
+        ChangeNotifierProvider(create: (_) => ExpenseProvider()),
+        ChangeNotifierProvider(create: (_) => CustomerProvider()),
+        ChangeNotifierProvider(create: (_) => SaleProvider()),
+        ChangeNotifierProvider(create: (_) => DashboardProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
-        home: Dashboard(),
+        home: Login(),
         // routes: {
         //   'dashboard'
         // },
