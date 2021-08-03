@@ -9,11 +9,13 @@ class DropdownType extends StatefulWidget {
   Function? onTap;
   bool? needTap;
   double width;
+  String model;
 
   DropdownType({
     required this.dropdownValue,
     required this.objectList,
     required this.onChanged,
+    required this.model,
     this.onTap,
     this.needTap,
     this.width = 0.2,
@@ -40,7 +42,7 @@ class _DropdownTypeState extends State<DropdownType> {
       ),
       child: DropdownButton<String>(
         hint: Text(
-          'SELECT EMPLOYEE',
+          'SELECT ${widget.model}',
           style: TextStyle(
             fontFamily: 'Montserrat',
             fontSize: 17,
@@ -74,7 +76,7 @@ class _DropdownTypeState extends State<DropdownType> {
             widget.current = newValue;
           });
         },
-        onTap: () {},
+        onTap: widget.onTap == null ? () {} : widget.onTap!(),
         //widget.onTap!(),
         items: widget.objectList.map((String value) {
           return DropdownMenuItem<String>(
