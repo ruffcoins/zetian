@@ -18,6 +18,7 @@ class SideMenu extends StatelessWidget {
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
+
         children: <Widget>[
           DrawerHeader(
             child: Column(
@@ -201,12 +202,7 @@ class SideMenu extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ListTile(
-                  title: Text(''),
-                ),
-                ListTile(
-                  title: Text(''),
-                ),
+                SizedBox(height: 50),
                 ListTile(
                   leading: Icon(Icons.logout_rounded),
                   title: Text(
