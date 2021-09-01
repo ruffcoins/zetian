@@ -6,6 +6,7 @@ import 'package:zetian/models/customer/update/add_car_to_customer_request.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/customer_provider.dart';
 import 'package:zetian/screens/basic/customer/updatecustomer.dart';
+import 'package:zetian/screens/basic/customer/viewcustomers.dart';
 import 'package:zetian/utils/string_extension.dart';
 
 class CustomerProfile extends StatefulWidget {
@@ -68,7 +69,7 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                 itemBuilder: (BuildContext context) => [
                   PopupMenuItem(
                     padding: EdgeInsets.only(
-                        top: 30, right: 30, left: 30, bottom: 30),
+                        top: 30, bottom: 10, right: 30, left: 30),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
@@ -78,26 +79,87 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                                 builder: (context) => UpdateCustomer(
                                     customerDetails: widget.customerDetails)));
                       },
-                      child: Text(
-                        "Update",
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                      child: Center(
+                        child: Text(
+                          "Update",
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
                   PopupMenuItem(
-                    padding: EdgeInsets.only(bottom: 30, right: 30, left: 30),
+                    padding: EdgeInsets.only(
+                        top: 20, bottom: 30, right: 30, left: 30),
                     child: GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        "Delete",
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Colors.red,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                      onTap: () async {
+                        return await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Confirm"),
+                              content: const Text(
+                                  "Are you sure you wish to delete this item?"),
+                              actions: <Widget>[
+                                GestureDetector(
+                                    onTap: () {
+                                      deleteCustomer(
+                                          Provider.of<AppProvider>(context,
+                                                  listen: false)
+                                              .dio,
+                                          widget.customerDetails.customer.id,
+                                          Provider.of<AppProvider>(context,
+                                                  listen: false)
+                                              .baseUrl,
+                                          context);
+
+                                      Provider.of<CustomerProvider>(context,
+                                                  listen: false)
+                                              .isLoading
+                                          ? () {}
+                                          : Navigator.pop(context);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ViewCustomers(),
+                                          ));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 10, right: 5),
+                                      child: const Text("Delete",
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold)),
+                                    )),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 10, right: 10),
+                                    child: const Text("CANCEL"),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: Center(
+                        child: Text(
+                          "Delete",
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Colors.red,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
