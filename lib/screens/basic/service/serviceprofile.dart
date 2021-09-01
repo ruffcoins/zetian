@@ -45,7 +45,7 @@ class _ServiceProfileState extends State<ServiceProfile> with ServiceHelper {
               itemBuilder: (BuildContext context) => [
                 PopupMenuItem(
                   padding:
-                      EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 30),
+                      EdgeInsets.only(top: 30, bottom: 10, right: 30, left: 30),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
@@ -56,17 +56,20 @@ class _ServiceProfileState extends State<ServiceProfile> with ServiceHelper {
                                 serviceDetails: widget.serviceDetails),
                           ));
                     },
-                    child: Text(
-                      "Update",
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                    child: Center(
+                      child: Text(
+                        "Update",
+                        style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
                 PopupMenuItem(
-                  padding: EdgeInsets.only(bottom: 30, right: 30, left: 30),
+                  padding:
+                      EdgeInsets.only(top: 20, bottom: 30, right: 30, left: 30),
                   child: GestureDetector(
                     onTap: () async {
                       return await showDialog(
@@ -100,25 +103,39 @@ class _ServiceProfileState extends State<ServiceProfile> with ServiceHelper {
                                           builder: (context) => ViewServices(),
                                         ));
                                   },
-                                  child: const Text("DELETE")),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 10, right: 5),
+                                    child: const Text("Delete",
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold)),
+                                  )),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pop(context);
                                 },
-                                child: const Text("CANCEL"),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 10, right: 10),
+                                  child: const Text("CANCEL"),
+                                ),
                               ),
                             ],
                           );
                         },
                       );
                     },
-                    child: Text(
-                      "Delete",
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.red,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                    child: Center(
+                      child: Text(
+                        "Delete",
+                        style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.red,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),

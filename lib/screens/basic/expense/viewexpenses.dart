@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:zetian/mixins/employee_helper.dart';
 import 'package:zetian/mixins/expense_helper.dart';
-import 'package:zetian/models/expense/read/get_recent_expense_response.dart';
 import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
@@ -16,7 +16,8 @@ class ViewExpense extends StatefulWidget {
   _ViewExpenseState createState() => _ViewExpenseState();
 }
 
-class _ViewExpenseState extends State<ViewExpense> with EmployeeHelper {
+class _ViewExpenseState extends State<ViewExpense>
+    with EmployeeHelper, ExpenseHelper {
   void initState() {
     getAllEmployees(Provider.of<AppProvider>(context, listen: false).dio,
         Provider.of<AppProvider>(context, listen: false).baseUrl, context);
@@ -397,45 +398,45 @@ class _ViewExpenseState extends State<ViewExpense> with EmployeeHelper {
                             SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              'This Week',
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              '₦950000',
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 30,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            // Text(
+                            //   'This Week',
+                            //   style: TextStyle(
+                            //     fontFamily: 'Montserrat',
+                            //     fontSize: 20,
+                            //     color: Colors.white,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
+                            // Text(
+                            //   '₦950000',
+                            //   style: TextStyle(
+                            //     fontFamily: 'Montserrat',
+                            //     fontSize: 30,
+                            //     color: Colors.white,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
                             SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              'Today',
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              '₦300000',
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 30,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            // Text(
+                            //   'Today',
+                            //   style: TextStyle(
+                            //     fontFamily: 'Montserrat',
+                            //     fontSize: 20,
+                            //     color: Colors.white,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
+                            // Text(
+                            //   '₦300000',
+                            //   style: TextStyle(
+                            //     fontFamily: 'Montserrat',
+                            //     fontSize: 30,
+                            //     color: Colors.white,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
                           ],
                         ),
                       )
@@ -540,6 +541,11 @@ class _RecentTransactionsState extends State<RecentTransactions>
     with ExpenseHelper {
   @override
   void initState() {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+    print(formattedDate); //  2021-08-03
+
     getAllExpenses(Provider.of<AppProvider>(context, listen: false).dio,
         Provider.of<AppProvider>(context, listen: false).baseUrl, context);
 
@@ -558,7 +564,7 @@ class _RecentTransactionsState extends State<RecentTransactions>
       /// Dynamic
       return Expanded(
         child: Container(
-            //: MediaQuery.of(context).size.height*0.55,
+          // height: MediaQuery.of(context).size.height*0.8,
             width: double.infinity,
             margin: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
@@ -596,7 +602,7 @@ class _RecentTransactionsState extends State<RecentTransactions>
                         ],
                       ))
                     : Container(
-                        height: MediaQuery.of(context).size.height * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.7,
                         // padding: EdgeInsets.only(bottom: 70.0),
                         child: ListView.builder(
                           itemCount: provider.expenses.length,
@@ -630,7 +636,9 @@ class _RecentTransactionsState extends State<RecentTransactions>
                                       fontWeight: FontWeight.w500),
                                 ),
                                 trailing: Text(
-                                  provider.expenses[index].amount.toString(),
+                                  '₦' +
+                                      provider.expenses[index].amount
+                                          .toString(),
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontFamily: 'Montserrat',

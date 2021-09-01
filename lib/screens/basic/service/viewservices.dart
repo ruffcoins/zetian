@@ -36,7 +36,10 @@ class _ViewServicesState extends State<ViewServices> with ServiceHelper {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back_ios)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: Icon(Icons.arrow_back_ios),
+              )),
           title: Center(
             child: Text(
               'Services',
