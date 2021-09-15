@@ -28,6 +28,19 @@ dependencies:
   dio:
   flutter_spinkit:
   dropdown_search: ^0.6.3
+  intl: ^0.17.0
+
+  # create pdf document
+  pdf: ^3.1.0
+
+  # save file
+  path_provider: ^2.0.1
+
+  # open pdf document
+  open_file: ^3.1.0
+
+  # printing
+  printing: ^5.5.0
 
   flutter:
     sdk: flutter
