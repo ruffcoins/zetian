@@ -479,7 +479,7 @@ class _SaleDetailState extends State<SaleDetail> with SaleHelper {
                 // Next Section
                 Expanded(
                     child: Container(
-                      width: double.infinity,
+                  width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.8,
                   margin: EdgeInsets.only(top: 15),
                   decoration: BoxDecoration(
