@@ -19,21 +19,23 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> with DashboardHelper {
   var selectedItem = 'Services';
-  GetDashboardResponse? result;
+  DashboardMessage? result;
 
   @override
-  void initState() {
+  void initState(){
     // print(result!.message.employeeCount.toString());
-
-    getDashboard(Provider.of<AppProvider>(context, listen: false).dio,
-        Provider.of<AppProvider>(context, listen: false).baseUrl, context);
-
+    getDashboardValues();
     super.initState();
+  }
+
+  void getDashboardValues() async{
+    await getDashboard(Provider.of<AppProvider>(context, listen: false).dio,Provider.of<AppProvider>(context, listen: false).baseUrl, context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardProvider>(builder: (context, provider, child) {
+      result = provider.result;
       return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
