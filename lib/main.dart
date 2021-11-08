@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/providers/customer_provider.dart';
 import 'package:zetian/providers/dashboard_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CustomerProvider()),
         ChangeNotifierProvider(create: (_) => SaleProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
+        ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

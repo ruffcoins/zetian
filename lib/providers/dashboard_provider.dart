@@ -13,8 +13,8 @@ class DashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDashboardResult(DashboardMessage DashboardResult) {
-    result = DashboardResult;
+  void updateDashboardResult(DashboardMessage dashboardResult) {
+    result = dashboardResult;
     notifyListeners();
   }
 }

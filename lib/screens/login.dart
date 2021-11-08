@@ -1,6 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetian/mixins/login_helper.dart';
+import 'package:zetian/models/authentication/login/login_request.dart';
+import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/screens/basic/dashboard.dart';
 import 'package:zetian/screens/register.dart';
 
@@ -9,9 +14,13 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> with LoginHelper {
   late String _email, _password;
-  final auth = FirebaseAuth.instance;
+
+  // final auth = FirebaseAuth.instance;
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   final FocusNode passwordField = FocusNode();
 
@@ -34,7 +43,7 @@ class _LoginState extends State<Login> {
                         children: [
                           Container(
                               padding:
-                              EdgeInsets.fromLTRB(30.0, 110.0, 0.0, 0.0),
+                                  EdgeInsets.fromLTRB(30.0, 110.0, 0.0, 0.0),
                               child: Text("Hello",
                                   style: new TextStyle(
                                     fontSize: 80.0,
@@ -52,7 +61,7 @@ class _LoginState extends State<Login> {
                                       ))),
                               Container(
                                   padding:
-                                  EdgeInsets.fromLTRB(0.0, 175.0, 0.0, 0.0),
+                                      EdgeInsets.fromLTRB(0.0, 175.0, 0.0, 0.0),
                                   child: Text(".",
                                       style: TextStyle(
                                           fontSize: 80.0,
@@ -65,7 +74,7 @@ class _LoginState extends State<Login> {
                   Container(
                       constraints: BoxConstraints(maxWidth: 700),
                       padding:
-                      EdgeInsets.only(top: 35.0, left: 40.0, right: 40.0),
+                          EdgeInsets.only(top: 35.0, left: 40.0, right: 40.0),
                       child: Column(
                         children: [
                           TextFormField(
@@ -78,7 +87,7 @@ class _LoginState extends State<Login> {
                                     color: Colors.grey),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                    BorderSide(color: Colors.green))),
+                                        BorderSide(color: Colors.green))),
                             onEditingComplete: () {
                               FocusScope.of(context)
                                   .requestFocus(passwordField);
@@ -95,7 +104,7 @@ class _LoginState extends State<Login> {
                                     color: Colors.grey),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                    BorderSide(color: Colors.green))),
+                                        BorderSide(color: Colors.green))),
                             obscureText: true,
                           )
                         ],
@@ -211,6 +220,7 @@ class _LoginState extends State<Login> {
                         child: Column(
                           children: [
                             TextFormField(
+                              controller: usernameController,
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
                                   labelText: "EMAIL",
@@ -233,6 +243,7 @@ class _LoginState extends State<Login> {
                             ),
                             SizedBox(height: 10.0),
                             TextFormField(
+                              controller: passwordController,
                               focusNode: passwordField,
                               decoration: InputDecoration(
                                   labelText: "PASSWORD",
@@ -253,41 +264,45 @@ class _LoginState extends State<Login> {
                           ],
                         )),
                     SizedBox(height: 40.0),
-                    GestureDetector(
-                      onTap: () async {
-                        try {
-                          await auth.signInWithEmailAndPassword(
-                              email: _email, password: _password);
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Dashboard()));
-                        } on FirebaseAuthException catch (e) {
-                          print('Failed with error code: ${e.code}');
-                          print(e.message);
-                        }
-                      },
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: 700),
-                        padding: EdgeInsets.only(left: 40.0, right: 40.0),
-                        height: 40.0,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(20.0),
-                          shadowColor: Colors.greenAccent,
-                          color: Colors.green,
-                          elevation: 7.0,
-                          child: Center(
-                            child: Text(
-                              'LOGIN',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    Consumer<AuthenticationProvider>(
+                        builder: (context, provider, child) {
+                      return provider.isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : Container(
+                              constraints: BoxConstraints(maxWidth: 700),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Colors.green),
+                              margin: EdgeInsets.only(left: 40.0, right: 40.0),
+                              height: 40.0,
+                              child: MaterialButton(
+                                //color: Colors.green,
+                                elevation: 7.0,
+                                onPressed: () {
+                                  loginUser(
+                                      Provider.of<AppProvider>(context,
+                                              listen: false)
+                                          .dio,
+                                      LoginRequest(
+                                          username: usernameController.text,
+                                          password: passwordController.text),
+                                      Provider.of<AppProvider>(context,
+                                              listen: false)
+                                          .baseUrl,
+                                      context);
+                                },
+                                child: Center(
+                                  child: Text(
+                                    'LOGIN',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            );
+                    }),
                     SizedBox(
                       height: 15.0,
                     ),
