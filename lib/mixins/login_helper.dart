@@ -23,15 +23,29 @@ mixin LoginHelper {
     Provider.of<AuthenticationProvider>(_authContext!, listen: false)
         .updateIsLoading(false);
 
-    print("Operation Result: ${operation.code}");
-    print("Operation Succeeded = : ${operation.succeeded}");
+    // print("Operation Result: ${operation.code}");
+    // print("Operation Succeeded = : ${operation.succeeded}");
 
+    if (operation.code == 400){
+      print ("400");
+      final snackBar = SnackBar(
+        content: Text("Something went wrong!"),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
+    }
+
+    if (operation.code == 404) {
+      final snackBar = SnackBar(
+        content: Text("Wrong Username or Password"),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
+    }
     // TODO: Push to Dashboard Page
     if (operation.succeeded == true) {
       Navigator.pushReplacement(
           _authContext!, MaterialPageRoute(builder: (context) => Dashboard()));
-    } else {
-      print("Login did not succeed: _loginUserCompleted function()");
     }
   }
 }
