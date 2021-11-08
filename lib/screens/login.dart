@@ -43,6 +43,7 @@ class _LoginState extends State<Login> with LoginHelper {
                         Container(
                             padding: EdgeInsets.fromLTRB(30.0, 110.0, 0.0, 0.0),
                             child: Text("Hello",
+                                textScaleFactor: 1.0  ,
                                 style: new TextStyle(
                                   fontSize: 80.0,
                                   fontWeight: FontWeight.bold,
@@ -53,6 +54,7 @@ class _LoginState extends State<Login> with LoginHelper {
                                 padding:
                                     EdgeInsets.fromLTRB(34.0, 175.0, 0.0, 0.0),
                                 child: Text("There",
+                                    textScaleFactor: 1.0,
                                     style: new TextStyle(
                                       fontSize: 80.0,
                                       fontWeight: FontWeight.bold,
@@ -134,6 +136,8 @@ class _LoginState extends State<Login> with LoginHelper {
                                 //color: Colors.green,
                                 elevation: 7.0,
                                 onPressed: () {
+                                  print(usernameController.text);
+                                  print(passwordController.text);
                                   loginUser(
                                       Provider.of<AppProvider>(context,
                                               listen: false)
@@ -145,6 +149,7 @@ class _LoginState extends State<Login> with LoginHelper {
                                               listen: false)
                                           .baseUrl,
                                       context);
+                                  initState();
                                 },
                                 child: Center(
                                   child: Text(
@@ -160,35 +165,6 @@ class _LoginState extends State<Login> with LoginHelper {
                     }),
                     SizedBox(
                       height: 15.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'New User ?',
-                          style: TextStyle(
-                              fontFamily: 'Montserrat', fontSize: 15.0),
-                        ),
-                        SizedBox(width: 5.0),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Register()));
-                          },
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              color: Colors.green,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        )
-                      ],
                     ),
                   ],
                 ),
