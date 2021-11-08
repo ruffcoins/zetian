@@ -73,16 +73,19 @@ class _RegisterState extends State<Register> with RegisterHelper {
                   child: Stack(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                           padding: EdgeInsets.fromLTRB(34.0, 0.0, 0.0, 0.0),
                           child: Text("Register",
+                              textScaleFactor: 1,
                               style: new TextStyle(
                                 fontSize: 80.0,
                                 fontWeight: FontWeight.bold,
                               ))),
                       Container(
                           child: Text(".",
+                              textScaleFactor: 1,
                               style: TextStyle(
                                   fontSize: 80.0,
                                   fontWeight: FontWeight.bold,
