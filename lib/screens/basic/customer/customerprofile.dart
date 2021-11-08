@@ -170,24 +170,24 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
         ),
         body: LayoutBuilder(
           builder: (context, constraints) {
-            if (constraints.maxWidth >= 768) {
-              //
-              // Tablet View
-              //
-              return Column(
-                children: [
-                  // Name Section
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-                    child: Row(
+            //
+            //Mobile View
+            //
+            return SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.9,
+                child: Column(
+                  children: [
+                    // Name Section
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(left: 28.0, top: 7.0),
                           child: CircleAvatar(
-                            radius: 40,
-                            backgroundImage:
-                                AssetImage('assets/images/customer-image.png'),
+                            radius: MediaQuery.of(context).devicePixelRatio * 15,
+                            backgroundImage: AssetImage(
+                                'assets/images/customer-image.png'),
                           ),
                         ),
                         Padding(
@@ -196,22 +196,27 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.6,
+                                width:
+                                    MediaQuery.of(context).size.width * 0.6,
                                 child: Text(
-                                  'Chibueze Nnaemeka',
+                                  widget.customerDetails.customer.firstName
+                                          .capitalize() +
+                                      ' ' +
+                                      widget.customerDetails.customer.lastName
+                                          .capitalize(),
+                                  textScaleFactor: 1.0,
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontWeight: FontWeight.w600,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.05,
+                                      fontSize: 16,
                                       color: Colors.white),
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 8.0),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.center,
                                   children: [
                                     Icon(
                                       Icons.location_on,
@@ -237,489 +242,183 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                         )
                       ],
                     ),
-                  ),
-                  // Next Section
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 38, right: 38, top: 15, bottom: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '17',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                    // Next Section
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 38, right: 38, top: 15, bottom: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.customerDetails.transactionCount
+                                    .toString(),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Transactions',
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.white,
-                                fontSize: 17,
-                              ),
-                            )
-                          ],
-                        ),
-                        Container(
-                          color: Colors.white,
-                          width: 1,
-                          height: 22,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '5000',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                              ),
-                            ),
-                            Text(
-                              'Spent',
-                              style: TextStyle(
+                              Text(
+                                'Transactions',
+                                style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.white,
-                                  fontSize: 17),
-                            )
-                          ],
-                        ),
-                        Container(
-                          color: Colors.white,
-                          width: 1,
-                          height: 22,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '2',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                              ),
-                            ),
-                            Text(
-                              'Cars',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
+                                  fontSize: 17,
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            color: Colors.white,
+                            width: 1,
+                            height: 22,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '₦' +
+                                    widget.customerDetails.totalAmount
+                                        .toString(),
+                                style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 17),
-                            )
-                          ],
-                        ),
-                      ],
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                              ),
+                              Text(
+                                'Spent',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.white,
+                                    fontSize: 17),
+                              )
+                            ],
+                          ),
+                          Container(
+                            color: Colors.white,
+                            width: 1,
+                            height: 22,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.customerDetails.carCount.toString(),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                              ),
+                              Text(
+                                'Cars',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.white,
+                                    fontSize: 17),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                      child: Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(top: 15),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(34))),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                    Expanded(
+                        child: Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.only(top: 15),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(34))),
                       child: ListView(
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsets.only(top: 33, right: 25, left: 25),
+                            padding: EdgeInsets.all(MediaQuery.of(context).devicePixelRatio * 10),
                             child: Text(
                               'Profile',
+                              textScaleFactor: 1.0,
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
-                                  fontSize: 30,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 33, right: 25, left: 25, bottom: 25),
+                              left: MediaQuery.of(context).devicePixelRatio * 10,
+                              bottom: MediaQuery.of(context).devicePixelRatio * 10,
+                            ),
                             child: Text(
-                              'Transactions',
+                              'Recent Services',
+                              textScaleFactor: 1.0,
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   color: Colors.black87
                                   // fontWeight: FontWeight.bold
                                   ),
                             ),
                           ),
-                          Column(children: [
-                            ListTile(
-                              leading: Icon(
-                                Icons.local_car_wash_rounded,
-                                size: 30,
-                              ),
-                              title: Text(
-                                'Normal Wash',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text(
-                                'Nov 7',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              trailing: Text(
-                                '7000',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                            ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.local_car_wash_rounded,
-                                size: 30,
-                              ),
-                              title: Text(
-                                'Detailed Wash',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text(
-                                'Dec 8',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              trailing: Text(
-                                '10000',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                            ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.local_car_wash_rounded,
-                                size: 30,
-                              ),
-                              title: Text(
-                                'Engine Wash',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text(
-                                'Jan 2',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              trailing: Text(
-                                '9000',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                            ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.local_car_wash_rounded,
-                                size: 30,
-                              ),
-                              title: Text(
-                                'Interior Wash',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text(
-                                'Feb 14',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              trailing: Text(
-                                '5000',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                            ),
-                          ]),
-                        ],
-                      ),
-                    ),
-                  ))
-                ],
-              );
-            } else {
-              //
-              //Mobile View
-              //
-              return SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  child: Column(
-                    children: [
-                      // Name Section
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 28.0, top: 7.0),
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundImage: AssetImage(
-                                  'assets/images/customer-image.png'),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 38.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.6,
-                                  child: Text(
-                                    widget.customerDetails.customer.firstName
-                                            .capitalize() +
-                                        ' ' +
-                                        widget.customerDetails.customer.lastName
-                                            .capitalize(),
-                                    style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.05,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.location_on,
-                                        color: Colors.white,
-                                        size: 17,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 8),
-                                        child: Text(
-                                          'Warri, NG',
-                                          style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              color: Colors.white,
-                                              wordSpacing: 4,
-                                              letterSpacing: 2),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.5,
+                            child: ListView.builder(
+                                padding: EdgeInsets.only(bottom: 50),
+                                itemCount: widget
+                                    .customerDetails.customerServices.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    leading: Icon(
+                                      Icons.local_car_wash_rounded,
+                                      size: 30,
+                                    ),
+                                    title: Text(
+                                      widget
+                                          .customerDetails
+                                          .customerServices[index]
+                                          .name
+                                          .capitalizeFirstofEach,
+                                      textScaleFactor: 1.0,
+                                      style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: Text(
+                                      getSaleDate(widget.customerDetails
+                                          .customerServices[index].id),
+                                      textScaleFactor: 1.0,
+                                      style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    trailing: Text(
+                                      widget.customerDetails
+                                          .customerServices[index].amount
+                                          .toString(),
+                                      textScaleFactor: 1.0,
+                                      style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                    ),
+                                  );
+                                }),
                           )
                         ],
                       ),
-                      // Next Section
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 38, right: 38, top: 15, bottom: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  widget.customerDetails.transactionCount
-                                      .toString(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22,
-                                  ),
-                                ),
-                                Text(
-                                  'Transactions',
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                  ),
-                                )
-                              ],
-                            ),
-                            Container(
-                              color: Colors.white,
-                              width: 1,
-                              height: 22,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '₦' +
-                                      widget.customerDetails.totalAmount
-                                          .toString(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22,
-                                  ),
-                                ),
-                                Text(
-                                  'Spent',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      color: Colors.white,
-                                      fontSize: 17),
-                                )
-                              ],
-                            ),
-                            Container(
-                              color: Colors.white,
-                              width: 1,
-                              height: 22,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  widget.customerDetails.carCount.toString(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22,
-                                  ),
-                                ),
-                                Text(
-                                  'Cars',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      color: Colors.white,
-                                      fontSize: 17),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                          child: Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(top: 15),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(34))),
-                        child: ListView(
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(top: 33, right: 25, left: 25),
-                              child: Text(
-                                'Profile',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: 33, right: 25, left: 25, bottom: 25),
-                              child: Text(
-                                'Recent Services',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 20,
-                                    color: Colors.black87
-                                    // fontWeight: FontWeight.bold
-                                    ),
-                              ),
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.5,
-                              child: ListView.builder(
-                                  padding: EdgeInsets.only(bottom: 50),
-                                  itemCount: widget
-                                      .customerDetails.customerServices.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      leading: Icon(
-                                        Icons.local_car_wash_rounded,
-                                        size: 30,
-                                      ),
-                                      title: Text(
-                                        widget
-                                            .customerDetails
-                                            .customerServices[index]
-                                            .name
-                                            .capitalizeFirstofEach,
-                                        style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      subtitle: Text(
-                                        getSaleDate(widget.customerDetails
-                                            .customerServices[index].id),
-                                        style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      trailing: Text(
-                                        widget.customerDetails
-                                            .customerServices[index].amount
-                                            .toString(),
-                                        style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                    );
-                                  }),
-                            )
-                          ],
-                        ),
-                      ))
-                    ],
-                  ),
+                    ))
+                  ],
                 ),
-              );
-            }
+              ),
+            );
           },
         ),
         floatingActionButton: FloatingActionButton(
