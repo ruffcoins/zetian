@@ -1,5 +1,9 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zetian/mixins/logout_helper.dart';
+import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/screens/basic/customer/viewcustomers.dart';
 import 'package:zetian/screens/basic/dashboard.dart';
 import 'package:zetian/screens/basic/employee/viewemployees.dart';
@@ -9,7 +13,7 @@ import 'package:zetian/screens/basic/sale/viewsales.dart';
 import 'package:zetian/screens/basic/service/viewservices.dart';
 import 'package:zetian/screens/login.dart';
 
-class SideMenu extends StatelessWidget {
+class SideMenu extends StatelessWidget with LogoutHelper {
   // final auth = FirebaseAuth.instance;
 
   @override
@@ -203,28 +207,36 @@ class SideMenu extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 50),
-                ListTile(
-                  leading: Icon(Icons.logout_rounded),
-                  title: Text(
-                    'Logout',
-                    style: TextStyle(
-                        letterSpacing: 2,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Montserrat',
-                        color: Colors.red),
-                  ),
-                  onTap: () {
-                    // try {
-                    // await auth.signOut();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                    // } on FirebaseAuthException catch (e) {
-                    //   print('Failed with error code: ${e.code}');
-                    //   print(e.message);
-                    // }
-                  },
-                ),
+                Consumer<AuthenticationProvider>(builder: (context, provider, child) {
+                  return provider.isLoading ? CircularProgressIndicator() : ListTile(
+                    leading: Icon(Icons.logout_rounded),
+                    title: Text(
+                      'Logout',
+                      style: TextStyle(
+                          letterSpacing: 2,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Montserrat',
+                          color: Colors.red),
+                    ),
+                    onTap: () {
+                      logoutUser(Provider.of<AppProvider>(context,
+                          listen: false)
+                          .dio,
+                        Provider.of<AppProvider>(context,
+                            listen: false)
+                            .baseUrl,
+                        context
+                      );
+                      // try {
+                      // await auth.signOut();
+                      // } on FirebaseAuthException catch (e) {
+                      //   print('Failed with error code: ${e.code}');
+                      //   print(e.message);
+                      // }
+                    },
+                  );
+                }),
               ],
             ),
           )
