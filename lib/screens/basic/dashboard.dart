@@ -24,12 +24,12 @@ class _DashboardState extends State<Dashboard> with DashboardHelper {
   @override
   void initState(){
     // print(result!.message.employeeCount.toString());
-    getDashboardValues();
+    getDashboard(
+      Provider.of<AppProvider>(context, listen: false).dio,
+      Provider.of<AppProvider>(context, listen: false).baseUrl,
+      context
+    );
     super.initState();
-  }
-
-  void getDashboardValues() async{
-    await getDashboard(Provider.of<AppProvider>(context, listen: false).dio,Provider.of<AppProvider>(context, listen: false).baseUrl, context);
   }
 
   @override
