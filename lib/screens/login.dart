@@ -149,7 +149,6 @@ class _LoginState extends State<Login> with LoginHelper {
                                               listen: false)
                                           .baseUrl,
                                       context);
-                                  initState();
                                 },
                                 child: Center(
                                   child: Text(
