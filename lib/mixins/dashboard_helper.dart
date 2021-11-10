@@ -11,19 +11,19 @@ mixin DashboardHelper {
 
   getDashboard(Dio dio, String baseUrl, BuildContext context) {
     _authContext = context;
-    Provider.of<DashboardProvider>(_authContext!, listen: false)
-        .updateIsLoading(true);
     dashboardRepo.getDashboard(dio, baseUrl, _getDashboardCompleted);
+    Provider.of<DashboardProvider>(_authContext!, listen: false)
+        .updateIsLoading(true, false);
   }
 
   _getDashboardCompleted(Operation operation) {
     GetDashboardResponse dashboardResponse = operation.result;
     DashboardMessage dashboard = dashboardResponse.message;
 
-    // Provider.of<DashboardProvider>(_authContext!, listen: false)
-    //     .updateDashboardResult(dashboard);
+    Provider.of<DashboardProvider>(_authContext!, listen: false)
+        .updateDashboardResult(dashboard);
 
     Provider.of<DashboardProvider>(_authContext!, listen: false)
-        .updateIsLoading(false);
+        .updateIsLoading(false, true);
   }
 }
