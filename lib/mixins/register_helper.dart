@@ -21,5 +21,31 @@ mixin RegisterHelper {
     print("${operation.result}");
     Provider.of<AuthenticationProvider>(_authContext!, listen: false)
         .updateIsLoading(false);
+
+    if (operation.code == 401){
+      print ("400");
+      final snackBar = SnackBar(
+        content: Text("User not Authorized to create accounts!"),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
+    }
+
+    if (operation.code == 400){
+      print ("400");
+      final snackBar = SnackBar(
+        content: Text("Something went wrong!"),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
+    }
+
+    if (operation.code == 422) {
+      final snackBar = SnackBar(
+        content: Text("User already exists"),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
+    }
   }
 }

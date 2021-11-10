@@ -9,14 +9,18 @@ class RegisterData {
       Response response = await dio.post("https://zeitan.herokuapp.com/user",
           data: request.toJson());
 
-      print("Got here");
+      print("Got here: RegisterData");
       print(response.data);
+      return Operation(response.statusCode, response.data);
     } on DioError catch (e) {
-      print("Got Problems");
-      print(e.message);
+      print("Got here: RegisteredUser");
+      try {
+        return Operation(e.response!.statusCode, e.message);
+      }
+      catch(e){
+        return Operation(400, "Error Occurred");
+      }
     }
-
-    return Operation(500, "Problems");
   }
 }
 

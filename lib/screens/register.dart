@@ -5,6 +5,7 @@ import 'package:zetian/mixins/register_helper.dart';
 import 'package:zetian/models/authentication/register/register_request.dart';
 import 'package:zetian/models/employee/read/get_employee_response.dart';
 import 'package:zetian/providers/app_provider.dart';
+import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
 import 'package:zetian/utils/string_extension.dart';
 
@@ -160,38 +161,41 @@ class _RegisterState extends State<Register> with RegisterHelper {
                     ],
                   )),
               SizedBox(height: 40.0),
-              GestureDetector(
-                onTap: () {
-                  print("Registering User...");
-                  registerUser(
-                      Provider.of<AppProvider>(context, listen: false).dio,
-                      RegisterRequest(
-                          username: usernameController.text,
-                          password: passwordController.text),
-                      Provider.of<AppProvider>(context, listen: false).baseUrl,
-                      context);
-                },
-                child: Container(
-                  padding: EdgeInsets.only(left: 40.0, right: 40.0),
-                  height: 40.0,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(20.0),
-                    shadowColor: Colors.greenAccent,
-                    color: Colors.green,
-                    elevation: 7.0,
-                    // Register Button
-                    child: Center(
-                      child: Text(
-                        'REGISTER',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold),
+              Consumer<AuthenticationProvider>(
+                  builder: (context, provider, child) {
+                    return provider.isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : Container(
+                      constraints: BoxConstraints(maxWidth: 700),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.green),
+                      margin: EdgeInsets.only(left: 40.0, right: 40.0),
+                      height: 40.0,
+                      child: MaterialButton(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        onPressed: () {
+                          print("Registering User...");
+                          registerUser(
+                              Provider.of<AppProvider>(context, listen: false).dio,
+                              RegisterRequest(
+                                  username: usernameController.text,
+                                  password: passwordController.text),
+                              Provider.of<AppProvider>(context, listen: false).baseUrl,
+                              context);
+                        },
+                        child: Center(
+                          child: Text(
+                            'REGISTER',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    );
+                  }),
               SizedBox(height: 20.0),
               GestureDetector(
                 onTap: () {
