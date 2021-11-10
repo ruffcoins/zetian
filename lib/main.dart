@@ -9,6 +9,7 @@ import 'package:zetian/providers/expense_provider.dart';
 import 'package:zetian/providers/sale_provider.dart';
 import 'package:zetian/providers/service_provider.dart';
 import 'package:zetian/screens/login.dart';
+import 'package:zetian/screens/register.dart';
 
 void main() {
   runApp(MyApp());
