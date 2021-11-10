@@ -7,10 +7,13 @@ class DashboardProvider extends ChangeNotifier {
   bool getDashboardLoading = false;
   DashboardMessage? result;
 
-  void updateIsLoading(bool isLoadingGotten) {
+  void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
     print(isLoading);
-    notifyListeners();
+    if (shouldNotify){
+      print("Notify True");
+      notifyListeners();
+    }
   }
 
   void updateDashboardResult(DashboardMessage dashboardResult) {
