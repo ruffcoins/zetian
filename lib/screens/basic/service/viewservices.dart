@@ -34,7 +34,7 @@ class _ViewServicesState extends State<ViewServices> with ServiceHelper {
           iconTheme: IconThemeData(color: Colors.green),
           leading: GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/dashboard');
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),

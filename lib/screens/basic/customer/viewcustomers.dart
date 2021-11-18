@@ -20,9 +20,11 @@ class _ViewCustomersState extends State<ViewCustomers> with CustomerHelper {
 
   @override
   void initState() {
+    print("Got here");
     getAllCustomers(Provider.of<AppProvider>(context, listen: false).dio,
         Provider.of<AppProvider>(context, listen: false).baseUrl, context);
     super.initState();
+    print("Got here 2");
   }
 
   @override
@@ -34,7 +36,7 @@ class _ViewCustomersState extends State<ViewCustomers> with CustomerHelper {
           iconTheme: IconThemeData(color: Colors.green),
           leading: GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/dashboard');
               },
               child: Icon(Icons.arrow_back_ios)),
           title: Center(

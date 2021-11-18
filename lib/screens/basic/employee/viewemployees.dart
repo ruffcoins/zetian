@@ -33,13 +33,13 @@ class _ViewEmployeesState extends State<ViewEmployees> with EmployeeHelper {
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.green),
           leading: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Icon(
-                Icons.arrow_back_ios,
-                size: 30,
-              )),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/dashboard');
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              size: 30,
+            )),
           title: Center(
             child: Text(
               'Employees',
