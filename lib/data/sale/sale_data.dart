@@ -5,10 +5,14 @@ import 'package:zetian/utils/operation.dart';
 
 class SalesData {
   Future<Operation> createSale(
-      Dio dio, CreateSaleRequest request, String baseUrl) async {
+      Dio dio, CreateSaleRequest request, String baseUrl, String token) async {
     try {
       Response response = await dio.post("https://zeitan.herokuapp.com/sale",
-          data: request.toJson());
+          data: request.toJson(), options: Options(
+              headers: {
+                "Authorization": "$token"
+              }
+          ));
       print(response.data);
     } on DioError catch (e) {
       print(e.message);
@@ -17,9 +21,13 @@ class SalesData {
     return Operation(500, "Problems");
   }
 
-  Future<Operation> getAllSales(Dio dio, String baseUrl) async {
+  Future<Operation> getAllSales(Dio dio, String baseUrl, String token) async {
     try {
-      Response response = await dio.get("https://zeitan.herokuapp.com/sales");
+      Response response = await dio.get("https://zeitan.herokuapp.com/sales", options: Options(
+          headers: {
+            "Authorization": "$token"
+          }
+      ));
       GetSaleResponse data = GetSaleResponse.fromJson(response.data);
       return Operation(response.statusCode, data);
     } on DioError catch (e) {

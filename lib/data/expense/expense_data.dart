@@ -6,11 +6,15 @@ import 'package:zetian/utils/operation.dart';
 
 class ExpenseData {
   Future<Operation> createExpense(Dio dio, CreateExpenseRequest request,
-      String baseUrl) async {
+      String baseUrl, String token) async {
     try {
       Response response = await dio.post(
           "https://zeitan.herokuapp.com/expense",
-          data: request.toJson()
+          data: request.toJson(), options: Options(
+          headers: {
+            "Authorization": "$token"
+          }
+      )
       );
       print(response.data);
     } on DioError catch (e) {
@@ -20,10 +24,14 @@ class ExpenseData {
     return Operation(500, "Problems");
   }
 
-  Future<Operation> getAllExpenses(Dio dio, String baseUrl) async {
+  Future<Operation> getAllExpenses(Dio dio, String baseUrl, String token) async {
     try {
       Response response = await dio.get(
-          "https://zeitan.herokuapp.com/expenses"
+          "https://zeitan.herokuapp.com/expenses", options: Options(
+          headers: {
+            "Authorization": "$token"
+          }
+      )
       );
       GetExpenseResponse data = GetExpenseResponse.fromJson(response.data);
       return Operation(response.statusCode, data);
@@ -34,10 +42,14 @@ class ExpenseData {
     return Operation(500, "Problems");
   }
 
-  Future<Operation> getRecentExpenses(Dio dio, String baseUrl) async {
+  Future<Operation> getRecentExpenses(Dio dio, String baseUrl, String token) async {
     try {
       Response response = await dio.get(
-          "https://zeitan.herokuapp.com/expenses/recent"
+          "https://zeitan.herokuapp.com/expenses/recent", options: Options(
+          headers: {
+            "Authorization": "$token"
+          }
+      )
       );
       GetRecentExpenseResponse data = GetRecentExpenseResponse.fromJson(
           response.data);

@@ -6,10 +6,14 @@ import 'package:zetian/utils/operation.dart';
 
 class ServiceData {
   Future<Operation> createService(
-      Dio dio, CreateServiceRequest request, String baseUrl) async {
+      Dio dio, CreateServiceRequest request, String baseUrl, String token) async {
     try {
       Response response = await dio.post("https://zeitan.herokuapp.com/service",
-          data: request.toJson());
+          data: request.toJson(),options: Options(
+              headers: {
+                "Authorization": "$token"
+              }
+          ));
       print(response.data);
     } on DioError catch (e) {
       print(e.message);
@@ -19,11 +23,15 @@ class ServiceData {
   }
 
   Future<Operation> updateService(
-      Dio dio, String id, UpdateServiceRequest request, String baseUrl) async {
+      Dio dio, String id, UpdateServiceRequest request, String baseUrl, String token) async {
     try {
       Response response = await dio.patch(
           "https://zeitan.herokuapp.com/services/$id",
-          data: request.toJson());
+          data: request.toJson(),options: Options(
+          headers: {
+            "Authorization": "$token"
+          }
+      ));
       print(response.data);
     } on DioError catch (e) {
       print(e.message);
@@ -32,10 +40,14 @@ class ServiceData {
     return Operation(500, "Problems");
   }
 
-  Future<Operation> getAllServices(Dio dio, String baseUrl) async {
+  Future<Operation> getAllServices(Dio dio, String baseUrl, String token) async {
     try {
       Response response =
-          await dio.get("https://zeitan.herokuapp.com/services");
+          await dio.get("https://zeitan.herokuapp.com/services", options: Options(
+              headers: {
+                "Authorization": "$token"
+              }
+          ));
       GetServiceResponse data = GetServiceResponse.fromJson(response.data);
       return Operation(response.statusCode, data);
     } on DioError catch (e) {
@@ -45,10 +57,14 @@ class ServiceData {
     return Operation(500, "Problems");
   }
 
-  Future<Operation> deleteService(Dio dio, String id, String baseUrl) async {
+  Future<Operation> deleteService(Dio dio, String id, String baseUrl, String token) async {
     try {
       Response response =
-          await dio.delete("https://zeitan.herokuapp.com/services/$id");
+          await dio.delete("https://zeitan.herokuapp.com/services/$id", options: Options(
+              headers: {
+                "Authorization": "$token"
+              }
+          ));
       print(response.data);
     } on DioError catch (e) {
       print(e.message);

@@ -1,19 +1,32 @@
 import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
 import 'package:zetian/models/dashbaord/get_dashboard_response.dart';
+import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/utils/operation.dart';
 
 class DashboardData {
-  Future<Operation> getDashboard(Dio dio, String baseUrl) async {
+  Future<Operation> getDashboard(Dio dio, String baseUrl, token) async {
     try {
       Response response =
-          await dio.get("https://zeitan.herokuapp.com/dashboard");
+          await dio.get("https://zeitan.herokuapp.com/dashboard", options: Options(
+            headers: {
+              "Authorization": "$token"
+            }
+          ));
       GetDashboardResponse data = GetDashboardResponse.fromJson(response.data);
+
+      print(response.data);
+      print(data.message.serviceCount);
       return Operation(response.statusCode, data);
     } on DioError catch (e) {
-      print(e.message);
+      try {
+        return Operation(e.response!.statusCode, e.message);
+      }
+      catch(e){
+        print(e);
+        return Operation(400, "Error Occurred");
+      }
     }
-
-    return Operation(500, "Problems");
   }
 }
 

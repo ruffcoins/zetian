@@ -2,9 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:zetian/utils/operation.dart';
 
 class Logout {
-  Future<Operation> logout(Dio dio, String baseUrl) async {
+  Future<Operation> logout(Dio dio, String baseUrl, token) async {
     try {
-      Response response = await dio.post("https://zeitan.herokuapp.com/user/logout",);
+      Response response = await dio.post("https://zeitan.herokuapp.com/user/logout", options: Options(
+        headers: {
+          "Authorization" : "$token"
+        }
+      ));
 
       print("Got here: Logout");
       print(response.data);
