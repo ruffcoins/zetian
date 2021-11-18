@@ -52,199 +52,8 @@ class _ExpenseDetailState extends State<ExpenseDetail> with ExpenseHelper {
               ),
             )),
       ),
-      endDrawer: SideMenu(),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          if (constraints.maxWidth >= 768) {
-            //
-            // Tablet View
-            //
-            return Column(
-              children: [
-                Container(
-                  constraints: BoxConstraints(maxWidth: 700),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.attach_money_rounded,
-                                  size: 35.0,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  'Expense Details',
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 35,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                // Next Section
-                Expanded(
-                    child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: 15),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(34))),
-                  child: ListView(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 50, left: 50, right: 50),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'ID',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              '#1',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Expense',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Salaries',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Purpose',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Employee salary payments',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Amount',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              '₦100000',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Employee',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Chibueze Nnaemeka',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Date',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              '05-05-2021',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ))
-              ],
-            );
-          } else {
             //
             //Mobile View
             //
@@ -279,6 +88,7 @@ class _ExpenseDetailState extends State<ExpenseDetail> with ExpenseHelper {
                                 ),
                                 Text(
                                   'Expense Details',
+                                  textScaleFactor: 1.0,
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 35,
@@ -444,7 +254,6 @@ class _ExpenseDetailState extends State<ExpenseDetail> with ExpenseHelper {
                 ))
               ],
             );
-          }
         },
       ),
     );
