@@ -5,6 +5,7 @@ import 'package:zetian/data/expense/expense_repo.dart';
 import 'package:zetian/models/expense/create/create_new_expense_request.dart';
 import 'package:zetian/models/expense/read/get_expense_response.dart';
 import 'package:zetian/models/expense/read/get_recent_expense_response.dart';
+import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/providers/expense_provider.dart';
 import 'package:zetian/utils/operation.dart';
 
@@ -14,9 +15,10 @@ mixin ExpenseHelper {
   createExpense(Dio dio, CreateExpenseRequest request, String baseUrl,
       BuildContext context) {
     _authContext = context;
+    String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
     Provider.of<ExpenseProvider>(_authContext!, listen: false)
         .updateIsLoading(true);
-    expenseRepo.createExpense(dio, request, baseUrl, _createExpenseCompleted);
+    expenseRepo.createExpense(dio, request, baseUrl, _createExpenseCompleted, token);
   }
 
   _createExpenseCompleted(Operation operation) {
@@ -29,7 +31,8 @@ mixin ExpenseHelper {
     _authContext = context;
     Provider.of<ExpenseProvider>(_authContext!, listen: false).updateIsLoading(
         true);
-    expenseRepo.getAllExpenses(dio, baseUrl, _getExpensesCompleted);
+    String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
+    expenseRepo.getAllExpenses(dio, baseUrl, _getExpensesCompleted, token);
   }
 
   _getExpensesCompleted(Operation operation) {
@@ -46,7 +49,8 @@ mixin ExpenseHelper {
     _authContext = context;
     Provider.of<ExpenseProvider>(_authContext!, listen: false)
         .updateRecentLoading(true);
-    expenseRepo.getRecentExpenses(dio, baseUrl, _getRecentExpensesCompleted);
+    String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
+    expenseRepo.getRecentExpenses(dio, baseUrl, _getRecentExpensesCompleted, token);
   }
 
   _getRecentExpensesCompleted(Operation operation) {

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:zetian/data/sale/sale_repo.dart';
 import 'package:zetian/models/sale/create/create_new_sale_request.dart';
 import 'package:zetian/models/sale/read/get_sale_response.dart';
+import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/providers/sale_provider.dart';
 import 'package:zetian/utils/operation.dart';
 
@@ -13,8 +14,9 @@ mixin SaleHelper {
   createSale(Dio dio, CreateSaleRequest request, String baseUrl,
       BuildContext context) {
     _authContext = context;
+    String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
 
-    saleRepo.createSale(dio, request, baseUrl, _createSaleCompleted);
+    saleRepo.createSale(dio, request, baseUrl, _createSaleCompleted, token);
   }
 
   _createSaleCompleted(Operation operation) {
@@ -24,8 +26,9 @@ mixin SaleHelper {
   getAllSales(Dio dio, String baseUrl, BuildContext context) {
     _authContext = context;
     Provider.of<SaleProvider>(_authContext!, listen: false)
-        .updateIsLoading(true);
-    saleRepo.getAllSales(dio, baseUrl, _getSalesCompleted);
+        .updateIsLoading(true, false);
+    String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
+    saleRepo.getAllSales(dio, baseUrl, _getSalesCompleted, token);
   }
 
   _getSalesCompleted(Operation operation) {
@@ -35,7 +38,7 @@ mixin SaleHelper {
     Provider.of<SaleProvider>(_authContext!, listen: false)
         .updateSaleResult(sales);
     Provider.of<SaleProvider>(_authContext!, listen: false)
-        .updateIsLoading(false);
+        .updateIsLoading(false, true);
   }
 
 // getRecentSales(Dio dio, String baseUrl, BuildContext context) {

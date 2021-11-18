@@ -12,12 +12,13 @@ mixin LogoutHelper {
   logoutUser(
       Dio dio, String baseUrl, BuildContext context) {
     _authContext = context;
+    String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
     Provider.of<AuthenticationProvider>(_authContext!, listen: false)
         .updateIsLoading(true);
-    logoutRepo.logoutUser(dio, baseUrl, _loginUserCompleted);
+    logoutRepo.logoutUser(dio, baseUrl, _logoutUserCompleted, token);
   }
 
-  _loginUserCompleted(Operation operation) {
+  _logoutUserCompleted(Operation operation) {
     print("${operation.result}");
     Provider.of<AuthenticationProvider>(_authContext!, listen: false)
         .updateIsLoading(false);
