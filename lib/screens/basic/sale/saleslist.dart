@@ -55,7 +55,6 @@ class _SalesListState extends State<SalesList> with SaleHelper {
             ),
           ),
         ),
-        endDrawer: SideMenu(),
         body: LayoutBuilder(
           builder: (context, constraints) {
             if (constraints.maxWidth >= 768) {
