@@ -43,14 +43,23 @@ mixin LoginHelper {
       );
       ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
     }
+
+    if (operation.code == 503) {
+      final snackBar = SnackBar(
+        content: Text("Service Temporarily Unavailable"),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
+    }
     // TODO: Push to Dashboard Page
     if (operation.succeeded == true) {
+      Provider.of<AuthenticationProvider>(_authContext!, listen: false)
+          .updateUserInformation(operation.result);
 
       // print("Got here: User Info");
       // print(response.data);
 
-      Navigator.pushReplacement(
-          _authContext!, MaterialPageRoute(builder: (context) => Dashboard()));
+      Navigator.pushReplacementNamed(_authContext!, '/dashboard');
     }
   }
 }
