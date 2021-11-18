@@ -11,8 +11,9 @@ class _CustomerRepo {
     CreateCustomerRequest request,
     String url,
     OperationCompleted createCompleted,
+    String token
   ) {
-    customerData.createCustomer(dio, request, url).then((customerData) {
+    customerData.createCustomer(dio, request, url, token).then((customerData) {
       createCompleted(customerData);
     });
   }
@@ -23,8 +24,9 @@ class _CustomerRepo {
     UpdateCustomerRequest request,
     String url,
     OperationCompleted updateCompleted,
+    String token
   ) {
-    customerData.updateCustomer(dio, id, request, url).then((customerData) {
+    customerData.updateCustomer(dio, id, request, url, token).then((customerData) {
       updateCompleted(customerData);
     });
   }
@@ -35,8 +37,9 @@ class _CustomerRepo {
     AddCarToCustomerRequest request,
     String url,
     OperationCompleted updateCompleted,
+    String token
   ) {
-    customerData.addCarToCustomer(dio, id, request, url).then((customerData) {
+    customerData.addCarToCustomer(dio, id, request, url, token).then((customerData) {
       updateCompleted(customerData);
     });
   }
@@ -45,8 +48,9 @@ class _CustomerRepo {
     Dio dio,
     String url,
     OperationCompleted getCompleted,
+    String token
   ) {
-    customerData.getAllCustomers(dio, url).then((customerData) {
+    customerData.getAllCustomers(dio, url, token).then((customerData) {
       getCompleted(customerData);
     });
   }
@@ -56,8 +60,9 @@ class _CustomerRepo {
     String id,
     String url,
     OperationCompleted getCompleted,
+    String token
   ) {
-    customerData.deleteCustomer(dio, id, url).then((customerData) {
+    customerData.deleteCustomer(dio, id, url, token).then((customerData) {
       getCompleted(customerData);
     });
   }

@@ -10,8 +10,9 @@ class _EmployeeRepo {
     CreateEmployeeRequest request,
     String url,
     OperationCompleted createCompleted,
+    String token
   ) {
-    employeeData.createEmployee(dio, request, url).then((employeeData) {
+    employeeData.createEmployee(dio, request, url, token).then((employeeData) {
       createCompleted(employeeData);
     });
   }
@@ -22,8 +23,9 @@ class _EmployeeRepo {
     UpdateEmployeeRequest request,
     String url,
     OperationCompleted updateCompleted,
+    String token
   ) {
-    employeeData.updateEmployee(dio, id, request, url).then((employeeData) {
+    employeeData.updateEmployee(dio, id, request, url, token).then((employeeData) {
       updateCompleted(employeeData);
     });
   }
@@ -32,8 +34,9 @@ class _EmployeeRepo {
     Dio dio,
     String url,
     OperationCompleted getCompleted,
+    String token,
   ) {
-    employeeData.getAllEmployees(dio, url).then((employeeData) {
+    employeeData.getAllEmployees(dio, url, token).then((employeeData) {
       getCompleted(employeeData);
     });
   }
@@ -43,8 +46,9 @@ class _EmployeeRepo {
     String id,
     String url,
     OperationCompleted getCompleted,
+    String token
   ) {
-    employeeData.deleteEmployee(dio, id, url).then((employeeData) {
+    employeeData.deleteEmployee(dio, id, url, token).then((employeeData) {
       getCompleted(employeeData);
     });
   }

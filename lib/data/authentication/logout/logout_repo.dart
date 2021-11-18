@@ -7,8 +7,9 @@ class _LogoutRepo {
     Dio dio,
     String url,
     OperationCompleted logoutCompleted,
+    String token
   ) {
-    logout.logout(dio, url).then((logoutData) {
+    logout.logout(dio, url, token).then((logoutData) {
       logoutCompleted(logoutData);
     });
   }

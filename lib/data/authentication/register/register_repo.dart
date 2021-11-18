@@ -9,8 +9,9 @@ class _RegisterRepo {
     RegisterRequest request,
     String url,
     OperationCompleted registerCompleted,
+    String token
   ) {
-    registerData.registerUser(dio, request, url).then((registerData) {
+    registerData.registerUser(dio, request, url, token).then((registerData) {
       registerCompleted(registerData);
     });
   }

@@ -9,8 +9,9 @@ class _SaleRepo {
     CreateSaleRequest request,
     String url,
     OperationCompleted createCompleted,
+    String token
   ) {
-    saleData.createSale(dio, request, url).then((saleData) {
+    saleData.createSale(dio, request, url, token).then((saleData) {
       createCompleted(saleData);
     });
   }
@@ -19,8 +20,9 @@ class _SaleRepo {
     Dio dio,
     String url,
     OperationCompleted getCompleted,
+    String token
   ) {
-    saleData.getAllSales(dio, url).then((saleData) {
+    saleData.getAllSales(dio, url, token).then((saleData) {
       getCompleted(saleData);
     });
   }

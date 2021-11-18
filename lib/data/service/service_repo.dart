@@ -10,8 +10,9 @@ class _ServiceRepo {
     CreateServiceRequest request,
     String url,
     OperationCompleted createCompleted,
+    String token
   ) {
-    serviceData.createService(dio, request, url).then((serviceData) {
+    serviceData.createService(dio, request, url, token).then((serviceData) {
       createCompleted(serviceData);
     });
   }
@@ -22,8 +23,9 @@ class _ServiceRepo {
     UpdateServiceRequest request,
     String url,
     OperationCompleted updateCompleted,
+    String token
   ) {
-    serviceData.updateService(dio, id, request, url).then((serviceData) {
+    serviceData.updateService(dio, id, request, url, token).then((serviceData) {
       updateCompleted(serviceData);
     });
   }
@@ -32,8 +34,9 @@ class _ServiceRepo {
     Dio dio,
     String url,
     OperationCompleted getCompleted,
+    String token
   ) {
-    serviceData.getAllServices(dio, url).then((serviceData) {
+    serviceData.getAllServices(dio, url, token).then((serviceData) {
       getCompleted(serviceData);
     });
   }
@@ -43,8 +46,9 @@ class _ServiceRepo {
     String id,
     String url,
     OperationCompleted getCompleted,
+    String token
   ) {
-    serviceData.deleteService(dio, id, url).then((serviceData) {
+    serviceData.deleteService(dio, id, url, token).then((serviceData) {
       getCompleted(serviceData);
     });
   }

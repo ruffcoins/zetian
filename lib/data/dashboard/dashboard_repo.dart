@@ -7,8 +7,9 @@ class _DashboardRepo {
     Dio dio,
     String url,
     OperationCompleted getCompleted,
+    String token
   ) {
-    dashboardData.getDashboard(dio, url).then((dashboardData) {
+    dashboardData.getDashboard(dio, url, token).then((dashboardData) {
       getCompleted(dashboardData);
     });
   }
