@@ -8,7 +8,7 @@ import 'package:zetian/screens/basic/customer/viewcustomers.dart';
 import 'package:zetian/screens/basic/dashboard.dart';
 import 'package:zetian/screens/basic/employee/viewemployees.dart';
 import 'package:zetian/screens/basic/expense/viewexpenses.dart';
-import 'package:zetian/screens/basic/reports/reportlist.dart';
+import 'package:zetian/screens/basic/users/userlist.dart';
 import 'package:zetian/screens/basic/sale/viewsales.dart';
 import 'package:zetian/screens/basic/service/viewservices.dart';
 import 'package:zetian/screens/login.dart';
@@ -25,29 +25,33 @@ class SideMenu extends StatelessWidget with LogoutHelper {
 
         children: <Widget>[
           DrawerHeader(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'New User',
-                  style: TextStyle(
-                      fontSize: 24.0,
-                      color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600),
+            child: Consumer<AuthenticationProvider>(
+              builder: (context, provider, child) {
+                return provider.isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(provider.result?.message.username ?? "", style: TextStyle(
+                            fontSize: 24.0,
+                            color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                          Text(provider.result?.message.id ?? "",
+                            textScaleFactor: 1.0,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600),
+                          ),
+                      ],
+                    );
+                  }
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  'Phone Number',
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
             decoration: BoxDecoration(
               color: Colors.green,
             ),
@@ -65,10 +69,10 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               Navigator.pop(context);
 
               // Update the state of the app
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => Dashboard()),
-                      (route) => false);
+              print("Modal Route: ${ModalRoute.of(context)!.settings.name}");
+              if (ModalRoute.of(context)!.settings.name != "/dashboard"){
+                Navigator.pushNamed(context, '/dashboard');
+              }
             },
           ),
           Divider(
@@ -88,8 +92,10 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               Navigator.pop(context);
 
               // Update the state of the app
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ViewCustomers()));
+              print("Modal Route: ${ModalRoute.of(context)!.settings.name}");
+              if (ModalRoute.of(context)!.settings.name != "/customers") {
+                Navigator.pushNamed(context, '/customers');
+              }
             },
           ),
           Divider(
@@ -109,8 +115,9 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               Navigator.pop(context);
 
               // Update the state of the app
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ViewServices()));
+              if (ModalRoute.of(context)!.settings.name != "/services") {
+                Navigator.pushNamed(context, '/services');
+              }
             },
           ),
           Divider(
@@ -130,8 +137,9 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               Navigator.pop(context);
 
               // Update the state of the app
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => ViewSales()));
+              if (ModalRoute.of(context)!.settings.name != "/sales") {
+                Navigator.pushNamed(context, '/sales');
+              }
             },
           ),
           Divider(
@@ -151,8 +159,9 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               // ...
               // Then close the drawer
               Navigator.pop(context);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ViewExpense()));
+              if (ModalRoute.of(context)!.settings.name != "/expenses") {
+                Navigator.pushNamed(context, '/expenses');
+              }
             },
           ),
           Divider(
@@ -161,7 +170,7 @@ class SideMenu extends StatelessWidget with LogoutHelper {
           ),
           ListTile(
             title: Text(
-              'Reports',
+              'Users',
               style: TextStyle(
                   fontSize: 18.0,
                   fontFamily: 'Montserrat',
@@ -171,9 +180,11 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               // Update the state of the app
               // ...
               // Then close the drawer
+
               Navigator.pop(context);
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => ReportList()));
+              if (ModalRoute.of(context)!.settings.name != "/users") {
+                Navigator.pushNamed(context, '/users');
+              }
             },
           ),
           Divider(
@@ -193,8 +204,9 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               // ...
               // Then close the drawer
               Navigator.pop(context);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ViewEmployees()));
+              if (ModalRoute.of(context)!.settings.name != "/employees") {
+                Navigator.pushNamed(context, '/employees');
+              }
             },
           ),
           Divider(
@@ -208,7 +220,10 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               children: [
                 SizedBox(height: 50),
                 Consumer<AuthenticationProvider>(builder: (context, provider, child) {
-                  return provider.isLoading ? CircularProgressIndicator() : ListTile(
+                  return provider.isLoading ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircularProgressIndicator(),
+                  ) : ListTile(
                     leading: Icon(Icons.logout_rounded),
                     title: Text(
                       'Logout',
