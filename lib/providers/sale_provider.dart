@@ -10,10 +10,12 @@ class SaleProvider extends ChangeNotifier {
 
   // List<RecentSaleResult> recentSales = [];
 
-  void updateIsLoading(bool isLoadingGotten) {
+  void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
     print(isLoading);
-    notifyListeners();
+    if (shouldNotify){
+      notifyListeners();
+    }
   }
 
   void updateRecentLoading(bool isLoadingGotten) {

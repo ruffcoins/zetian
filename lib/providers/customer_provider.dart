@@ -7,10 +7,12 @@ class CustomerProvider extends ChangeNotifier {
   bool getEmployeeLoading = false;
   List<CustomerMessage> customers = [];
 
-  void updateIsLoading(bool isLoadingGotten) {
+  void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
     print(isLoading);
-    notifyListeners();
+    if(shouldNotify) {
+      notifyListeners();
+    }
   }
 
   void updateCustomerResult(List<CustomerMessage> customersResult) {

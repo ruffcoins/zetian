@@ -7,10 +7,12 @@ class ServiceProvider extends ChangeNotifier {
   bool getServiceLoading = false;
   List<Message> services = [];
 
-  void updateIsLoading(bool isLoadingGotten) {
+  void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
     print(isLoading);
-    notifyListeners();
+    if (shouldNotify) {
+      notifyListeners();
+    }
   }
 
   void updateServiceResult(List<Message> servicesResult) {
