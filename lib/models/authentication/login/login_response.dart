@@ -13,19 +13,23 @@ class LoginResponse {
   LoginResponse({
     required this.success,
     required this.message,
+    required this.token,
   });
 
   bool success;
   LoginMessage message;
+  String token;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         success: json["success"],
         message: LoginMessage.fromJson(json["message"]),
+        token: json["token"]
       );
 
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message.toJson(),
+        "token": token
       };
 }
 
