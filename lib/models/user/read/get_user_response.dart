@@ -10,12 +10,12 @@ String userResponseToJson(UserResponse data) => json.encode(data.toJson());
 
 class UserResponse {
   UserResponse({
-    this.success,
-    this.message,
+    required this.success,
+    required this.message,
   });
 
-  bool? success;
-  List<User>? message;
+  bool success;
+  List<User> message;
 
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
     success: json["success"],
@@ -24,7 +24,7 @@ class UserResponse {
 
   Map<String, dynamic> toJson() => {
     "success": success,
-    "message": List<dynamic>.from(message!.map((x) => x.toJson())),
+    "message": List<dynamic>.from(message.map((x) => x.toJson())),
   };
 }
 
