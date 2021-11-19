@@ -13,13 +13,64 @@ class UserDetail extends StatelessWidget {
       ),
       body: Center(
         child: Container(
+          margin: EdgeInsets.only(top: 25),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(user.username ?? "No name"),
-              Text(user.id!),
-              Text(user.role ?? "No role"),
-              Text(user.v.toString()),
+              ListTile(
+                title: Text(
+                  'User Name',
+                  textScaleFactor: 1.0,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(
+                  user.username ?? "No name",
+                  textScaleFactor: 1.0,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  'User ID ',
+                  textScaleFactor: 1.0,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(
+                  user.id!,
+                  textScaleFactor: 1.0,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  'User Role',
+                  textScaleFactor: 1.0,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(
+                  user.role ?? "No role",
+                  textScaleFactor: 1.0,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
             ],
           ),
         ),
