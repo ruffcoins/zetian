@@ -7,6 +7,7 @@ import 'package:zetian/models/employee/read/get_employee_response.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
+import 'package:zetian/utils/dropdown.dart';
 import 'package:zetian/utils/string_extension.dart';
 
 class Register extends StatefulWidget {
@@ -16,7 +17,8 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> with RegisterHelper {
   // late String _username, _password;
-  String? dropdownValue;
+  String dropdownValue = "USER";
+  List<String> userTypes = ["USER", "ADMIN"];
   List<String> employeeNames = [];
   List<String> employeeID = [];
   String selectedEmployeeID = '';
@@ -122,6 +124,11 @@ class _RegisterState extends State<Register> with RegisterHelper {
                       TextFormField(
                         focusNode: passwordField,
                         controller: passwordController,
+                        validator: (password){
+                          if (password != null){
+                            return password.length < 7 ? "password must be up to 7 characters" : "";
+                          }
+                        },
                         decoration: InputDecoration(
                             labelText: "PASSWORD",
                             labelStyle: TextStyle(
@@ -137,27 +144,17 @@ class _RegisterState extends State<Register> with RegisterHelper {
                         //   });
                         // },
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 8.0),
-                      //   child: DropdownType(
-                      //       model: 'EMPLOYEE',
-                      //       width: 0.7,
-                      //       dropdownValue: Provider.of<EmployeeProvider>(
-                      //                   context,
-                      //                   listen: false)
-                      //               .isLoading
-                      //           ? ""
-                      //           : dropdownValue,
-                      //       objectList: Provider.of<EmployeeProvider>(context,
-                      //                   listen: false)
-                      //               .isLoading
-                      //           ? []
-                      //           : employeeNames,
-                      //       onChanged: (value) {
-                      //         dropdownValue = value;
-                      //         selectedEmployeeID = findEmployeeID(value);
-                      //       }),
-                      // )
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: DropdownType(
+                            model: 'USER TYPE',
+                            width: 0.7,
+                            dropdownValue: dropdownValue,
+                            objectList: userTypes,
+                            onChanged: (value) {
+                              dropdownValue = value;
+                            }),
+                      )
                     ],
                   )),
               SizedBox(height: 40.0),
@@ -182,7 +179,9 @@ class _RegisterState extends State<Register> with RegisterHelper {
                                   username: usernameController.text,
                                   password: passwordController.text),
                               Provider.of<AppProvider>(context, listen: false).baseUrl,
-                              context);
+                              dropdownValue,
+                              context
+                          );
                         },
                         child: Center(
                           child: Text(
