@@ -34,6 +34,7 @@ class Cards extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
                   title!,
+                  textScaleFactor: 1.0,
                   style: TextStyle(
                     color: Colors.green,
                     fontFamily: 'Montserrat',
