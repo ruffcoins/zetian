@@ -21,13 +21,17 @@ mixin DashboardHelper {
 
   _getDashboardCompleted(Operation operation) {
     print (operation.result);
-    GetDashboardResponse dashboardResponse = operation.result;
-    DashboardMessage dashboard = dashboardResponse.message;
+    try {
+      GetDashboardResponse dashboardResponse = operation.result;
+      DashboardMessage dashboard = dashboardResponse.message;
+      print("_getDashboardCompleted: ${dashboard.serviceCount}");
 
-    print("_getDashboardCompleted: ${dashboard.serviceCount}");
+      Provider.of<DashboardProvider>(_authContext!, listen: false)
+          .updateDashboardResult(dashboard);
 
-    Provider.of<DashboardProvider>(_authContext!, listen: false)
-        .updateDashboardResult(dashboard);
+    } catch (e) {
+      print(e);
+    }
 
     Provider.of<DashboardProvider>(_authContext!, listen: false)
         .updateIsLoading(false, true);

@@ -48,11 +48,15 @@ mixin ServiceHelper {
   }
 
   _getServicesCompleted(Operation operation) {
-    GetServiceResponse serviceResponse = operation.result;
-    List<Message> services = serviceResponse.message;
+    try {
+      GetServiceResponse serviceResponse = operation.result;
+      List<Message> services = serviceResponse.message;
 
-    Provider.of<ServiceProvider>(_authContext!, listen: false)
-        .updateServiceResult(services);
+      Provider.of<ServiceProvider>(_authContext!, listen: false)
+          .updateServiceResult(services);
+    } catch (e){
+      print(e);
+    }
     Provider.of<ServiceProvider>(_authContext!, listen: false)
         .updateIsLoading(false, true);
   }

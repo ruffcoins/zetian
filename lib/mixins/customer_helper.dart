@@ -70,11 +70,17 @@ mixin CustomerHelper {
 
   _getCustomersCompleted(Operation operation) {
     // print("Get All Customers: ${operation.result}");
-    GetCustomerResponse customerResponse = operation.result;
-    List<CustomerMessage> customers = customerResponse.message;
+    try {
+      GetCustomerResponse customerResponse = operation.result;
+      List<CustomerMessage> customers = customerResponse.message;
 
-    Provider.of<CustomerProvider>(_authContext!, listen: false)
-        .updateCustomerResult(customers);
+      Provider.of<CustomerProvider>(_authContext!, listen: false)
+          .updateCustomerResult(customers);
+      ScaffoldMessenger.of(_authContext!).showSnackBar(SnackBar(content: Text("Refreshed..."), backgroundColor: Colors.green,));
+    } catch (e){
+      print(e);
+      ScaffoldMessenger.of(_authContext!).showSnackBar(SnackBar(content: Text("Couldn't load or refresh..."), backgroundColor: Colors.red,));
+    }
     Provider.of<CustomerProvider>(_authContext!, listen: false)
         .updateIsLoading(false, true);
   }
