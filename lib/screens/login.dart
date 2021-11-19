@@ -1,4 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,8 +5,6 @@ import 'package:zetian/mixins/login_helper.dart';
 import 'package:zetian/models/authentication/login/login_request.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/authentication_provider.dart';
-import 'package:zetian/screens/basic/dashboard.dart';
-import 'package:zetian/screens/register.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -15,7 +12,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> with LoginHelper {
-  late String _email, _password;
 
   // final auth = FirebaseAuth.instance;
 
@@ -94,7 +90,6 @@ class _LoginState extends State<Login> with LoginHelper {
                               },
                               onChanged: (value) {
                                 setState(() {
-                                  _email = value.trim();
                                 });
                               },
                             ),
@@ -114,7 +109,6 @@ class _LoginState extends State<Login> with LoginHelper {
                               obscureText: true,
                               onChanged: (value) {
                                 setState(() {
-                                  _password = value.trim();
                                 });
                               },
                             )
