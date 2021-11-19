@@ -255,6 +255,7 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                               Text(
                                 widget.customerDetails.transactionCount
                                     .toString(),
+                                textScaleFactor: 1.0,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Montserrat',
@@ -264,6 +265,7 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                               ),
                               Text(
                                 'Transactions',
+                                textScaleFactor: 1.0,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.white,
@@ -284,6 +286,7 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                                 '₦' +
                                     widget.customerDetails.totalAmount
                                         .toString(),
+                                textScaleFactor: 1.0,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Montserrat',
@@ -293,6 +296,7 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                               ),
                               Text(
                                 'Spent',
+                                textScaleFactor: 1.0,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: Colors.white,
@@ -310,6 +314,7 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                             children: [
                               Text(
                                 widget.customerDetails.carCount.toString(),
+                                textScaleFactor: 1.0,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Montserrat',
@@ -319,6 +324,7 @@ class _CustomerProfileState extends State<CustomerProfile> with CustomerHelper {
                               ),
                               Text(
                                 'Cars',
+                                textScaleFactor: 1.0,
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: Colors.white,
