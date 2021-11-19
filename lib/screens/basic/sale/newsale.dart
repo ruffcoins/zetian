@@ -5,7 +5,6 @@ import 'package:zetian/mixins/sale_helper.dart';
 import 'package:zetian/models/customer/read/get_customer_response.dart';
 import 'package:zetian/models/sale/create/create_new_sale_request.dart';
 import 'package:zetian/models/service/read/get_service_response.dart';
-import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/customer_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
@@ -43,8 +42,8 @@ class _NewSaleState extends State<NewSale> with SaleHelper {
   @override
   void initState() {
     _customers =
-        Provider.of<CustomerProvider>(context, listen: false).customers;
-    services = Provider.of<ServiceProvider>(context, listen: false).services;
+        Provider.of<CustomerProvider>(context, listen: false).customers ?? [];
+    services = Provider.of<ServiceProvider>(context, listen: false).services ?? [];
     serviceTotalController.text = "0";
 
     for (var service in services) {
@@ -120,7 +119,6 @@ class _NewSaleState extends State<NewSale> with SaleHelper {
             ),
           ),
         ),
-        endDrawer: SideMenu(),
         body: LayoutBuilder(
           builder: (context, constraints) {
             if (constraints.maxWidth >= 768) {

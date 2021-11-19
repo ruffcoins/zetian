@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:zetian/mixins/expense_helper.dart';
 import 'package:zetian/models/employee/read/get_employee_response.dart';
 import 'package:zetian/models/expense/create/create_new_expense_request.dart';
-import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
 import 'package:zetian/providers/expense_provider.dart';
@@ -88,7 +87,6 @@ class _NewExpenseState extends State<NewExpense> with ExpenseHelper {
             ),
           ),
         ),
-        endDrawer: SideMenu(),
         body: LayoutBuilder(
           builder: (context, constraints) {
             if (constraints.maxWidth >= 768) {
