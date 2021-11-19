@@ -30,7 +30,7 @@ mixin EmployeeHelper {
     _authContext = context;
     String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
-        .updateIsLoading(true);
+        .updateIsLoading(true, false);
     employeeRepo.updateEmployee(
         dio, id, request, baseUrl, _updateEmployeeCompleted, token);
   }
@@ -38,7 +38,7 @@ mixin EmployeeHelper {
   _updateEmployeeCompleted(Operation operation) {
     print("This didn't work at all ${operation.getMessage(_authContext!)}");
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
-        .updateIsLoading(false);
+        .updateIsLoading(false, true);
   }
 
   getAllEmployees(Dio dio, String baseUrl, BuildContext context) {
@@ -46,30 +46,34 @@ mixin EmployeeHelper {
     print("message for the Gods");
     String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
-        .updateIsLoading(true);
+        .updateIsLoading(true, false);
     employeeRepo.getAllEmployees(dio, baseUrl, _getEmployeesCompleted, token);
   }
 
   _getEmployeesCompleted(Operation operation) {
-    GetEmployeeResponse employeeResponse = operation.result;
-    List<Message> employees = employeeResponse.message;
+    try {
+      GetEmployeeResponse employeeResponse = operation.result;
+      List<Message> employees = employeeResponse.message;
 
+      Provider.of<EmployeeProvider>(_authContext!, listen: false)
+          .updateEmployeeResult(employees);
+    } catch (e){
+      print(e);
+    }
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
-        .updateEmployeeResult(employees);
-    Provider.of<EmployeeProvider>(_authContext!, listen: false)
-        .updateIsLoading(false);
+        .updateIsLoading(false, true);
   }
 
   deleteEmployee(Dio dio, String id, String baseUrl, BuildContext context) {
     _authContext = context;
     String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
-        .updateIsLoading(true);
+        .updateIsLoading(true, false);
     employeeRepo.deleteEmployee(dio, id, baseUrl, _deleteEmployeeCompleted, token);
   }
 
   _deleteEmployeeCompleted(Operation operation) {
     Provider.of<EmployeeProvider>(_authContext!, listen: false)
-        .updateIsLoading(false);
+        .updateIsLoading(false, true);
   }
 }

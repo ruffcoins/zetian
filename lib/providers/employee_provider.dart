@@ -7,10 +7,12 @@ class EmployeeProvider extends ChangeNotifier {
   bool getEmployeeLoading = false;
   List<Message> employees = [];
 
-  void updateIsLoading(bool isLoadingGotten) {
+  void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
     print('employee provider is loading');
-    notifyListeners();
+    if (shouldNotify) {
+      notifyListeners();
+    }
   }
 
   void updateEmployeeResult(List<Message> employeesResult) {
