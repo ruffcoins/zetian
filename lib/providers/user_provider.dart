@@ -7,7 +7,7 @@ class UserProvider extends ChangeNotifier {
 
   void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
-    print('employee provider is loading');
+    print('user provider is loading');
     if (shouldNotify) {
       notifyListeners();
     }
