@@ -198,14 +198,12 @@ class _AddCustomerState extends State<AddCustomer> with CustomerHelper {
                                   .baseUrl,
                               context);
 
-                          Provider.of<CustomerProvider>(context, listen: false)
-                                  .isLoading
-                              ? () {}
-                              : Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ViewCustomers(),
-                                  ));
+                          if (provider.isLoading){
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Creating Customer...")));
+                          }
+                          else{
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewCustomers(),));
+                          }
                         },
                         child: Container(
                           padding: EdgeInsets.only(left: 40.0, right: 40.0),
