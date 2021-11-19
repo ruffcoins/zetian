@@ -21,14 +21,17 @@ mixin UserHelper {
   }
 
   _getUsersCompleted(Operation operation) {
-    UserResponse userResponse = operation.result;
-    List<User>? users = userResponse.message;
+    try {
+      UserResponse userResponse = operation.result;
+      List<User> users = userResponse.message;
 
-    Provider.of<UserProvider>(_authContext!, listen: false)
-        .updateUserResult(users!);
-    print("Get User Completed");
-    for (User item in users){
-      print (item.id);
+      Provider.of<UserProvider>(_authContext!, listen: false)
+          .updateUserResult(users);
+      print("Get User Completed");
+      ScaffoldMessenger.of(_authContext!).showSnackBar(SnackBar(content: Text("Refreshed..."), backgroundColor: Colors.green,));
+    } catch (e){
+      print(e);
+      ScaffoldMessenger.of(_authContext!).showSnackBar(SnackBar(content: Text("Couldn't load or refresh..."), backgroundColor: Colors.red,));
     }
     Provider.of<UserProvider>(_authContext!, listen: false)
         .updateIsLoading(false, true);
