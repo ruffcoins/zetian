@@ -2,7 +2,6 @@
 //
 //     final createExpenseRequest = createExpenseRequestFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 CreateExpenseRequest createExpenseRequestFromJson(String str) =>
