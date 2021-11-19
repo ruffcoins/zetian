@@ -10,12 +10,12 @@ mixin RegisterHelper {
   BuildContext? _authContext;
 
   registerUser(
-      Dio dio, RegisterRequest request, String baseUrl, BuildContext context) {
+      Dio dio, RegisterRequest request, String baseUrl, String userType, BuildContext context) {
     _authContext = context;
     String token = Provider.of<AuthenticationProvider>(_authContext!, listen: false).result!.token;
     Provider.of<AuthenticationProvider>(_authContext!, listen: false)
         .updateIsLoading(true);
-    registerRepo.registerUser(dio, request, baseUrl, _registerUserCompleted, token);
+    registerRepo.registerUser(dio, request, baseUrl, userType, _registerUserCompleted, token);
   }
 
   _registerUserCompleted(Operation operation) {
@@ -44,6 +44,14 @@ mixin RegisterHelper {
     if (operation.code == 422) {
       final snackBar = SnackBar(
         content: Text("User already exists"),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
+    }
+
+    if (operation.code == 412) {
+      final snackBar = SnackBar(
+        content: Text("Password Length must be up to 7 characters\nDo not use 'password' as password"),
         backgroundColor: Colors.red,
       );
       ScaffoldMessenger.of(_authContext!).showSnackBar(snackBar);
