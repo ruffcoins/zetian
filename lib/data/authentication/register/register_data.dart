@@ -4,18 +4,33 @@ import 'package:zetian/utils/operation.dart';
 
 class RegisterData {
   Future<Operation> registerUser(
-      Dio dio, RegisterRequest request, String baseUrl, String token) async {
+      Dio dio, RegisterRequest request, String baseUrl, String userType,String token) async {
     try {
-      Response response = await dio.post("https://zeitan.herokuapp.com/user/admin",
-          data: request.toJson(), options: Options(
+      if (userType == "USER") {
+        Response response = await dio.post(
+            "https://zeitan.herokuapp.com/user",
+            data: request.toJson(), options: Options(
             headers: {
               "Authorization": "$token"
             }
-          ));
+        ));
+        print("Got here: RegisterData");
+        print(response.data);
+        return Operation(response.statusCode, response.data);
+      }
+      else {
+        Response response = await dio.post(
+            "https://zeitan.herokuapp.com/user/admin",
+            data: request.toJson(), options: Options(
+            headers: {
+              "Authorization": "$token"
+            }
+        ));
+        print("Got here: RegisterData");
+        print(response.data);
+        return Operation(response.statusCode, response.data);
+      }
 
-      print("Got here: RegisterData");
-      print(response.data);
-      return Operation(response.statusCode, response.data);
     } on DioError catch (e) {
       print("Got here: RegisteredUser");
       try {
