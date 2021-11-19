@@ -51,10 +51,14 @@ class ServiceData {
       GetServiceResponse data = GetServiceResponse.fromJson(response.data);
       return Operation(response.statusCode, data);
     } on DioError catch (e) {
-      print(e.message);
+      try {
+        return Operation(e.response!.statusCode, e.message);
+      }
+      catch (e) {
+        print(e);
+        return Operation(400, "Error Occurred");
+      }
     }
-
-    return Operation(500, "Problems");
   }
 
   Future<Operation> deleteService(Dio dio, String id, String baseUrl, String token) async {
