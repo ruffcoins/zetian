@@ -4,14 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:zetian/mixins/logout_helper.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/authentication_provider.dart';
-import 'package:zetian/screens/basic/customer/viewcustomers.dart';
-import 'package:zetian/screens/basic/dashboard.dart';
-import 'package:zetian/screens/basic/employee/viewemployees.dart';
-import 'package:zetian/screens/basic/expense/viewexpenses.dart';
-import 'package:zetian/screens/basic/users/userlist.dart';
-import 'package:zetian/screens/basic/sale/viewsales.dart';
-import 'package:zetian/screens/basic/service/viewservices.dart';
-import 'package:zetian/screens/login.dart';
 
 class SideMenu extends StatelessWidget with LogoutHelper {
   // final auth = FirebaseAuth.instance;
@@ -70,8 +62,10 @@ class SideMenu extends StatelessWidget with LogoutHelper {
 
               // Update the state of the app
               print("Modal Route: ${ModalRoute.of(context)!.settings.name}");
+
+              // Prevent page from calling itself.
               if (ModalRoute.of(context)!.settings.name != "/dashboard"){
-                Navigator.pushNamed(context, '/dashboard');
+                Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (Route<dynamic> route) => false);
               }
             },
           ),
@@ -94,7 +88,7 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               // Update the state of the app
               print("Modal Route: ${ModalRoute.of(context)!.settings.name}");
               if (ModalRoute.of(context)!.settings.name != "/customers") {
-                Navigator.pushNamed(context, '/customers');
+                Navigator.pushNamedAndRemoveUntil(context, '/customers', (Route<dynamic> route) => false);
               }
             },
           ),
@@ -116,7 +110,7 @@ class SideMenu extends StatelessWidget with LogoutHelper {
 
               // Update the state of the app
               if (ModalRoute.of(context)!.settings.name != "/services") {
-                Navigator.pushNamed(context, '/services');
+                Navigator.pushNamedAndRemoveUntil(context, '/services', (Route<dynamic> route) => false);
               }
             },
           ),
@@ -138,7 +132,7 @@ class SideMenu extends StatelessWidget with LogoutHelper {
 
               // Update the state of the app
               if (ModalRoute.of(context)!.settings.name != "/sales") {
-                Navigator.pushNamed(context, '/sales');
+                Navigator.pushNamedAndRemoveUntil(context, '/sales', (Route<dynamic> route) => false);
               }
             },
           ),
@@ -160,7 +154,7 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               // Then close the drawer
               Navigator.pop(context);
               if (ModalRoute.of(context)!.settings.name != "/expenses") {
-                Navigator.pushNamed(context, '/expenses');
+                Navigator.pushNamedAndRemoveUntil(context, '/expenses', (Route<dynamic> route) => false);
               }
             },
           ),
@@ -183,7 +177,7 @@ class SideMenu extends StatelessWidget with LogoutHelper {
 
               Navigator.pop(context);
               if (ModalRoute.of(context)!.settings.name != "/users") {
-                Navigator.pushNamed(context, '/users');
+                Navigator.pushNamedAndRemoveUntil(context, '/users', (Route<dynamic> route) => false);
               }
             },
           ),
@@ -205,7 +199,7 @@ class SideMenu extends StatelessWidget with LogoutHelper {
               // Then close the drawer
               Navigator.pop(context);
               if (ModalRoute.of(context)!.settings.name != "/employees") {
-                Navigator.pushNamed(context, '/employees');
+                Navigator.pushNamedAndRemoveUntil(context, '/employees', (Route<dynamic> route) => false);
               }
             },
           ),
