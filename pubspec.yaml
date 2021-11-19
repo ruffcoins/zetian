@@ -29,6 +29,7 @@ dependencies:
   flutter_spinkit:
   dropdown_search: ^0.6.3
   fluttertoast: ^8.0.8
+  shared_preferences:
   intl: ^0.17.0
 
   # create pdf document
@@ -70,6 +71,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/customer-image.png
+    - assets/images/Zetian.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
