@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:zetian/mixins/expense_helper.dart';
 import 'package:zetian/models/expense/read/get_expense_response.dart';
-import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
 import 'package:zetian/providers/expense_provider.dart';
@@ -16,6 +16,7 @@ class ExpenseList extends StatefulWidget {
 class _ExpenseListState extends State<ExpenseList> with ExpenseHelper {
   bool expenseList = true;
   List<GetExpenseResponse> expenseResult = [];
+  var formatter = new DateFormat('yyyy-MM-dd');
 
   @override
   void initState() {
@@ -118,13 +119,15 @@ class _ExpenseListState extends State<ExpenseList> with ExpenseHelper {
                                     ),
                                     title: Text(
                                       provider.expenses[index].expense,
+                                      textScaleFactor: 1.0,
                                       style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     subtitle: Text(
-                                      provider.expenses[index].date.toString(),
+                                      formatter.format(provider.expenses[index].date).toString(),
+                                      textScaleFactor: 1.0,
                                       style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           fontSize: 18,
@@ -134,6 +137,7 @@ class _ExpenseListState extends State<ExpenseList> with ExpenseHelper {
                                       "₦" +
                                           provider.expenses[index].amount
                                               .toString(),
+                                      textScaleFactor: 1.0,
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontFamily: 'Montserrat',
