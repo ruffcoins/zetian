@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:zetian/mixins/service_helper.dart';
 import 'package:zetian/models/service/read/get_service_response.dart';
-import 'package:zetian/providers/app_provider.dart';
-import 'package:zetian/providers/service_provider.dart';
 import 'package:zetian/screens/basic/service/updateservice.dart';
-import 'package:zetian/screens/basic/service/viewservices.dart';
 import 'package:zetian/utils/string_extension.dart';
 
 class ServiceProfile extends StatefulWidget {
