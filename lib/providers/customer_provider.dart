@@ -5,7 +5,8 @@ class CustomerProvider extends ChangeNotifier {
   bool isLoading = false;
   bool editLoading = false;
   bool getEmployeeLoading = false;
-  List<CustomerMessage> customers = [];
+  // Made null-safe so as to differentiate between non-existence of data and empty returns.
+  List<CustomerMessage>? customers;
 
   void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
