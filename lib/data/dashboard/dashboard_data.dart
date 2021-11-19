@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:provider/provider.dart';
 import 'package:zetian/models/dashbaord/get_dashboard_response.dart';
-import 'package:zetian/providers/authentication_provider.dart';
 import 'package:zetian/utils/operation.dart';
 
 class DashboardData {
