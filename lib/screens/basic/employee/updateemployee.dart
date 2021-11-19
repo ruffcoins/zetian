@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:zetian/mixins/employee_helper.dart';
 import 'package:zetian/models/employee/read/get_employee_response.dart';
 import 'package:zetian/models/employee/update/update_employee_request.dart';
-import 'package:zetian/partials/sidemenu.dart';
 import 'package:zetian/providers/app_provider.dart';
 import 'package:zetian/providers/employee_provider.dart';
 import 'package:zetian/screens/basic/employee/viewemployees.dart';
@@ -68,7 +67,6 @@ class _UpdateEmployeeState extends State<UpdateEmployee> with EmployeeHelper {
             ),
           ),
         ),
-        endDrawer: SideMenu(),
         body: LayoutBuilder(
           builder: (context, constraints) {
             if (constraints.maxWidth >= 768) {
