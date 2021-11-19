@@ -8,6 +8,7 @@ import 'package:zetian/providers/service_provider.dart';
 import 'package:zetian/screens/basic/service/addservice.dart';
 import 'package:zetian/screens/basic/service/serviceprofile.dart';
 import 'package:zetian/utils/string_extension.dart';
+import 'package:zetian/widgets/no_network.dart';
 
 class ViewServices extends StatefulWidget {
   @override
@@ -27,194 +28,200 @@ class _ViewServicesState extends State<ViewServices> with ServiceHelper {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ServiceProvider>(builder: (context, provider, child) {
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.green),
-          leading: GestureDetector(
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/dashboard');
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Icon(Icons.arrow_back_ios),
-              )),
-          title: Center(
-            child: Text(
-              'Services',
-              style: TextStyle(
-                  fontSize: 25.0,
-                  fontFamily: 'Montserrat',
-                  color: Colors.green,
-                  fontWeight: FontWeight.w600),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (Route<dynamic> route) => false);
+        return true;
+      },
+      child: Consumer<ServiceProvider>(builder: (context, provider, child) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.green),
+            leading: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/dashboard');
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Icon(Icons.arrow_back_ios),
+                )),
+            title: Center(
+              child: Text(
+                'Services',
+                style: TextStyle(
+                    fontSize: 25.0,
+                    fontFamily: 'Montserrat',
+                    color: Colors.green,
+                    fontWeight: FontWeight.w600),
+              ),
             ),
           ),
-        ),
-        endDrawer: SideMenu(),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            if (constraints.maxWidth >= 768) {
-              //
-              // Tablet View
-              //
-              // If service list is empty show the empty service screen
-              if (serviceList == false) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.center ,
-                    children: [
-                      Text(
-                        'No Services',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 28.0,
-                        ),
-                      ),
-                      Icon(
-                        Icons.error,
-                        color: Colors.black38,
-                        size: 50.0,
-                      )
-                    ],
-                  ),
-                );
-              } else {
-                // If service list is not empty, show service list
-                return Center(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 20.0, bottom: 50.0),
-                    constraints: BoxConstraints(maxWidth: 600),
-                    child: ListView.builder(
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          //                           <-- Card widget
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.home_repair_service,
-                              size: 25,
-                            ),
-                            title: Text(
-                              'Service Name',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18),
-                            ),
-                            trailing: Text(
-                              '5000',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
-                            ),
+          endDrawer: SideMenu(),
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth >= 768) {
+                //
+                // Tablet View
+                //
+                // If service list is empty show the empty service screen
+                if (serviceList == false) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center ,
+                      children: [
+                        Text(
+                          'No Services',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 28.0,
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                );
-              }
-            } else {
-              //
-              // Mobile View
-              //
-              // If service list is empty show the empty service screen
-              if (serviceList == false) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.center ,
-                    children: [
-                      Text(
-                        'No Services',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 28.0,
                         ),
+                        Icon(
+                          Icons.error,
+                          color: Colors.black38,
+                          size: 50.0,
+                        )
+                      ],
+                    ),
+                  );
+                } else {
+                  // If service list is not empty, show service list
+                  return Center(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 20.0, bottom: 50.0),
+                      constraints: BoxConstraints(maxWidth: 600),
+                      child: ListView.builder(
+                        itemCount: 20,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            //                           <-- Card widget
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.home_repair_service,
+                                size: 25,
+                              ),
+                              title: Text(
+                                'Service Name',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18),
+                              ),
+                              trailing: Text(
+                                '5000',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      Icon(
-                        Icons.error,
-                        color: Colors.black38,
-                        size: 50.0,
-                      )
-                    ],
-                  ),
-                );
+                    ),
+                  );
+                }
               } else {
-                // If Service list is not empty, show service list
-                return Provider.of<ServiceProvider>(context, listen: true)
-                        .isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(
-                        strokeWidth: 4,
-                      ))
-                    : Container(
-                        padding: EdgeInsets.only(bottom: 70.0),
-                        child: ListView.builder(
-                          itemCount: provider.services.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ServiceProfile(
-                                            serviceDetails:
-                                                provider.services[index])));
-                              },
-                              child: Card(
-                                //                           <-- Card widget
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.home_repair_service,
-                                    size: 25,
-                                  ),
-                                  title: Text(
-                                    provider.services[index].name.capitalize(),
-                                    style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18),
-                                  ),
-                                  trailing: Text(
-                                    '₦' +
-                                        provider.services[index].amount
-                                            .toString(),
-                                    style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                //
+                // Mobile View
+                //
+                // If service list is empty show the empty service screen
+                if (serviceList == false) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center ,
+                      children: [
+                        Text(
+                          'No Services',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 28.0,
+                          ),
+                        ),
+                        Icon(
+                          Icons.error,
+                          color: Colors.black38,
+                          size: 50.0,
+                        )
+                      ],
+                    ),
+                  );
+                } else {
+                  // If Service list is not empty, show service list
+                  return Provider.of<ServiceProvider>(context, listen: true)
+                          .isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(
+                          strokeWidth: 4,
+                        )) : provider.services == null ? NoNetwork()
+                      : Container(
+                          padding: EdgeInsets.only(bottom: 70.0),
+                          child: ListView.builder(
+                            itemCount: provider.services!.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ServiceProfile(
+                                              serviceDetails:
+                                                  provider.services![index])));
+                                },
+                                child: Card(
+                                  //                           <-- Card widget
+                                  child: ListTile(
+                                    leading: Icon(
+                                      Icons.home_repair_service,
+                                      size: 25,
+                                    ),
+                                    title: Text(
+                                      provider.services![index].name.capitalize(),
+                                      style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18),
+                                    ),
+                                    trailing: Text(
+                                      '₦' +
+                                          provider.services![index].amount
+                                              .toString(),
+                                      style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      );
+                              );
+                            },
+                          ),
+                        );
+                }
               }
-            }
-          },
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AddService()));
-          },
-          label: Text(
-            'New Service',
-            style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),
+            },
           ),
-          icon: Icon(
-            Icons.add,
-            size: 30.0,
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => AddService()));
+            },
+            label: Text(
+              'New Service',
+              style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),
+            ),
+            icon: Icon(
+              Icons.add,
+              size: 30.0,
+            ),
+            backgroundColor: Colors.green,
           ),
-          backgroundColor: Colors.green,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      );
-    });
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        );
+      }),
+    );
   }
 }
