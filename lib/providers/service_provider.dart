@@ -5,7 +5,7 @@ class ServiceProvider extends ChangeNotifier {
   bool isLoading = false;
   bool editLoading = false;
   bool getServiceLoading = false;
-  List<Message> services = [];
+  List<Message>? services;
 
   void updateIsLoading(bool isLoadingGotten, bool shouldNotify) {
     isLoading = isLoadingGotten;
