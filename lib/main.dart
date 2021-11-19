@@ -18,6 +18,7 @@ import 'package:zetian/screens/basic/service/viewservices.dart';
 import 'package:zetian/screens/basic/users/userlist.dart';
 import 'package:zetian/screens/login.dart';
 import 'package:zetian/screens/register.dart';
+import 'package:zetian/screens/splash.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,9 +48,8 @@ class MyApp extends StatelessWidget {
         //home: Login(),
         initialRoute: '/',
         routes: {
-          // When navigating to the "/" route, build the FirstScreen widget.
-          '/': (context) => Login(),
-          // When navigating to the "/second" route, build the SecondScreen widget.
+          '/': (context) => Splash(),
+          '/login': (context) => Login(),
           '/dashboard': (context) => Dashboard(),
           '/register': (context) => Register(),
           '/customers': (context) => ViewCustomers(),
